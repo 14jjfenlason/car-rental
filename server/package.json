@@ -1,19 +1,19 @@
 {
-  "name": "car-rental",
+  "name": "rent-ride",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "watch": "nodemon",
+
     "seed": "node seeders/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/client": "^3.10.4",
-    "@graphql-tools/merge": "^9.0.4",
     "apollo-server-express": "^3.13.0",
     "@apollo/server": "^4.7.1",
     "graphql": "^16.8.1",
