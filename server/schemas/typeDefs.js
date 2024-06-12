@@ -15,7 +15,6 @@ type User {
     model: String!
     mileage: String!
     carId: String!
-    stock: String!
     year: Int!
     type: String!
     mileage: String!
