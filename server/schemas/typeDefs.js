@@ -41,7 +41,6 @@ type User {
     stock: String!
     year: Int!
     type: String!
-    mileage: String!
     image: String
   }
 
