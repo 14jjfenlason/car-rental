@@ -3,9 +3,14 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type Car {
     id: ID!
-    name: String!
+    make: String!
     model: String!
+    carId: String!
+    stock: String!
     year: Int!
+    type: String!
+    mileage: String!
+    image: String
   }
 
   type User {
@@ -15,7 +20,7 @@ const typeDefs = gql`
     password: String!
   }
 
-  type Booking {
+  type Reservation {
     id: ID!
     userId: ID!
     carId: ID!
@@ -33,8 +38,8 @@ const typeDefs = gql`
     car(carId: ID!): Car
     users: [User]
     user(userId: ID!): User
-    bookings: [Booking]
-    booking(bookingId: ID!): Booking
+    reservation: [Reservation]
+    reservation(ReservationId: ID!): 
   }
 
   type Mutation {
@@ -45,9 +50,9 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     updateUser(userId: ID!, name: String, email: String): User
     deleteUser(userId: ID!): User
-    addBooking(userId: ID!, carId: ID!, startDate: String!, endDate: String!): Booking
-    updateBooking(bookingId: ID!, startDate: String, endDate: String): Booking
-    deleteBooking(bookingId: ID!): Booking
+    addReservation(userId: ID!, carId: ID!, startDate: String!, endDate: String!): Reservation
+    updateReservation(reservationId: ID!, startDate: String, endDate: String): Reservation
+    deleteReservation(reservationId: ID!): Reservation
   }
 `;
 
