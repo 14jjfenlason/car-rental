@@ -1,134 +1,132 @@
 [
-    {
-        "make": "Toyota",
-        "model": "Corolla",
-        "carId": "1",
-        "stock": "1",
-        "year": 2020,
-        "type": "Sedan",
-        "mileage": "10000",
-        "image": "path/to/img.jpg"
-    },
+  {
+    "make": "Toyota",
+    "model": "Corolla",
+    "carId": "1",
+    "stock": "1",
+    "year": 2020,
+    "type": "Sedan",
+    "mileage": "10000",
+    "image": "path/to/img.jpg"
+  },
 
-    {
-        "make": "Honda",
-        "model": "Civic",
-        "carId": "2",
-        "stock": "2",
-        "year": 2019,
-        "type": "Sedan",
-        "mileage": "15000",
-        "image": "path/to/img.jpg"
-    },
+  {
+    "make": "Honda",
+    "model": "Civic",
+    "carId": "2",
+    "stock": "2",
+    "year": 2019,
+    "type": "Sedan",
+    "mileage": "15000",
+    "image": "path/to/img.jpg"
+  },
 
-    {
-        "make": "Ford",
-        "model": "Mustang",
-        "carId": "3",
-        "stock": "2",
-        "year": 2018,
-        "type": "Sedan",
-        "mileage": "11000",
-        "image": "path/to/img.jpg"
+  {
+    "make": "Ford",
+    "model": "Mustang",
+    "carId": "3",
+    "stock": "2",
+    "year": 2018,
+    "type": "Sedan",
+    "mileage": "11000",
+    "image": "path/to/img.jpg"
+  },
 
-    },
+  {
+    "make": "Volkswagen",
+    "model": "Golf",
+    "carId": "4",
+    "stock": "2",
+    "year": 2015,
+    "type": "SUV",
+    "mileage": "12000",
+    "image": "path/to/img.jpg"
+  },
 
-    {
-        "make": "Volkswagen",
-        "model": "Golf",
-        "carId": "4",
-        "stock": "2",
-        "year": 2015,
-        "type": "SUV",
-        "mileage": "12000",
-        "image": "path/to/img.jpg"
-    },
-    
-    {
-        "make": "Toyota",
-        "model": "RAV4",
-        "carId": "5",
-        "stock": "1",
-        "year": 2020,
-        "type": "SUV",
-        "mileage": "9000",
-        "image": "path/to/img.jpg"
-    },
+  {
+    "make": "Toyota",
+    "model": "RAV4",
+    "carId": "5",
+    "stock": "1",
+    "year": 2020,
+    "type": "SUV",
+    "mileage": "9000",
+    "image": "path/to/img.jpg"
+  },
 
-    {
-        "make": "Ford",
-        "model": "Explorer",
-        "carId": "6",
-        "stock": "1",
-        "year": 2018,
-        "type": "SUV",
-        "mileage": "8000",
-        "image": "path/to/img.jpg"
-    },
-    {
-        "make": "Toyota",
-        "model": "Tacoma",
-        "carId": "7",
-        "stock": "2",
-        "year": 2020,
-        "type": "Truck",
-        "mileage": "8000",
-        "image": "path/to/img.jpg"
-    },
+  {
+    "make": "Ford",
+    "model": "Explorer",
+    "carId": "6",
+    "stock": "1",
+    "year": 2018,
+    "type": "SUV",
+    "mileage": "8000",
+    "image": "path/to/img.jpg"
+  },
+  {
+    "make": "Toyota",
+    "model": "Tacoma",
+    "carId": "7",
+    "stock": "2",
+    "year": 2020,
+    "type": "Truck",
+    "mileage": "8000",
+    "image": "path/to/img.jpg"
+  },
 
-    {
-        "make": "Ford",
-        "model": "F-150",
-        "carId": "8",
-        "stock": "1",
-        "year": 2019,
-        "type": "Truck",
-        "mileage": "9000",
-        "image": "path/to/img.jpg"
-    },
+  {
+    "make": "Ford",
+    "model": "F-150",
+    "carId": "8",
+    "stock": "1",
+    "year": 2019,
+    "type": "Truck",
+    "mileage": "9000",
+    "image": "path/to/img.jpg"
+  },
 
-    {
-        "make": "Chevrolet",
-        "model": "Silverado",
-        "carId": "9",
-        "stock": "1",
-        "year": 2018,
-        "type": "Truck",
-        "mileage": "8500",
-        "image": "path/to/img.jpg"
-    },
+  {
+    "make": "Chevrolet",
+    "model": "Silverado",
+    "carId": "9",
+    "stock": "1",
+    "year": 2018,
+    "type": "Truck",
+    "mileage": "8500",
+    "image": "path/to/img.jpg"
+  },
 
-    {
-        "make": "Toyota",
-        "model": "Sienna",
-        "carId": "10",
-        "stock": "1",
-        "year": 2020,
-        "type": "Van",
-        "mileage": "8500",
-        "image": "path/to/img.jpg"
-    },
+  {
+    "make": "Toyota",
+    "model": "Sienna",
+    "carId": "10",
+    "stock": "1",
+    "year": 2020,
+    "type": "Van",
+    "mileage": "8500",
+    "image": "path/to/img.jpg"
+  },
 
-    {
-        "make": "Honda",
-        "model": "Odyssey",
-        "carId": "11",
-        "stock": "1",
-        "year": 2019,
-        "type": "Van",
-        "mileage": "8500",
-        "image": "path/to/img.jpg"
-    },
+  {
+    "make": "Honda",
+    "model": "Odyssey",
+    "carId": "11",
+    "stock": "1",
+    "year": 2019,
+    "type": "Van",
+    "mileage": "8500",
+    "image": "path/to/img.jpg"
+  },
 
-    {
-        "make": "Chrysler",
-        "model": "Pacifica",
-        "carId": "12",
-        "stock": "1",
-        "year": 2018,
-        "type": "Van",
-        "mileage": "8500",
-        "image": "path/to/img.jpg"
-    }
-    
+  {
+    "make": "Chrysler",
+    "model": "Pacifica",
+    "carId": "12",
+    "stock": "1",
+    "year": 2018,
+    "type": "Van",
+    "mileage": "8500",
+    "image": "path/to/img.jpg"
+  }
 ]
