@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
-const carSchema = require("./Car");
+;
 const userSchema = new Schema(
   {
     username: {
@@ -19,7 +19,13 @@ const userSchema = new Schema(
       required: true,
     },
     // set savedBooks to be an array of data that adheres to the bookSchema
-    savedCars: [carSchema],
+    // savedCars: [carSchema],
+    reservations: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'reservation'
+      }
+    ]
   },
   // set this to use virtual below
   {
@@ -30,7 +36,7 @@ const userSchema = new Schema(
 );
 
 // hash user password
-carSchemaSchema.pre("save", async function (next) {
+carSchema.pre("save", async function (next) {
   if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
