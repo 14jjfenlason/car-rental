@@ -2,31 +2,33 @@ const { Schema } = require("mongoose");
 
 // THIS WILL NEED TO BE A MODEL
 const carSchema = new Schema({
-  carMake: 
-    {
-      type: String,
-      required: true
-    },
-  
-  carModel: {
+
+  make: {
     type: String,
     required: true,
   },
 
-  carYear: {
-    type: Date,
+  model: {
+    type: String,
     required: true,
   },
-  carType:{
-    type:String
-  
+
+  stock: {
+    type: String,
+    require: true,
   },
+
+  mileage: {
+    type: String,
+    required: true,
+  },
+
   image: {
     type: String,
   },
- 
 
 });
 // make this a model
+const Car = model('Car', carSchema);
 
 module.exports = Car;
