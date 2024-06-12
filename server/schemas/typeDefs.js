@@ -1,10 +1,21 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  reservation: [ Reservation ]
+}
+
   type Car {
     id: ID!
     make: String!
+    make: String!
     model: String!
+    stock: String!
+    mileage: String!
     carId: String!
     stock: String!
     year: Int!
@@ -13,17 +24,9 @@ const typeDefs = gql`
     image: String
   }
 
-  type User {
-    id: ID!
-    name: String!
-    email: String!
-    password: String!
-  }
-
   type Reservation {
     id: ID!
-    userId: ID!
-    carId: ID!
+    reservationId: [Car]!
     startDate: String!
     endDate: String!
   }
@@ -34,25 +37,34 @@ const typeDefs = gql`
   }
 
   type Query {
+    users: [User]
+    user(name: String ): User
     cars: [Car]
     car(carId: ID!): Car
-    users: [User]
-    user(userId: ID!): User
-    reservation: [Reservation]
-    reservation(ReservationId: ID!): 
+    reservations: [Reservation]
+    reservation(reservationId: ID!): Reservation
   }
 
   type Mutation {
-    addCar(name: String!, model: String!, year: Int!): Car
-    updateCar(carId: ID!, name: String, model: String, year: Int): Car
-    deleteCar(carId: ID!): Car
-    addUser(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+
+    addUser(name: String!, email: String!, password: String!): Auth
+
     updateUser(userId: ID!, name: String, email: String): User
+
     deleteUser(userId: ID!): User
-    addReservation(userId: ID!, carId: ID!, startDate: String!, endDate: String!): Reservation
+
+    addReservation(userId: ID!, reservationId: ID!, startDate: String!, endDate: String!): Reservation
+
     updateReservation(reservationId: ID!, startDate: String, endDate: String): Reservation
+
     deleteReservation(reservationId: ID!): Reservation
+
+    addCar(name: String!, model: String!, year: Int!): Car
+
+    updateCar(carId: ID!, name: String, model: String, year: Int): Car
+
+    deleteCar(carId: ID!): Car
   }
 `;
 
