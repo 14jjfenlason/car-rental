@@ -3,7 +3,7 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
 type User {
   id: ID!
-  name: String!
+  username: String!
   email: String!
   password: String!
   reservation: [ Reservation ]
@@ -12,9 +12,7 @@ type User {
   type Car {
     id: ID!
     make: String!
-    make: String!
     model: String!
-    stock: String!
     mileage: String!
     carId: String!
     stock: String!
@@ -36,9 +34,22 @@ type User {
     user: User
   }
 
+  input Info {
+    id: ID!
+    make: String!
+    model: String!
+    mileage: String!
+    carId: String!
+    stock: String!
+    year: Int!
+    type: String!
+    mileage: String!
+    image: String
+  }
+
   type Query {
     users: [User]
-    user(name: String ): User
+    user(username: String ): User
     cars: [Car]
     car(carId: ID!): Car
     reservations: [Reservation]
@@ -48,9 +59,9 @@ type User {
   type Mutation {
     login(email: String!, password: String!): Auth
 
-    addUser(name: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
 
-    updateUser(userId: ID!, name: String, email: String): User
+    updateUser(userId: ID!, username: String, email: String): User
 
     deleteUser(userId: ID!): User
 
@@ -60,9 +71,9 @@ type User {
 
     deleteReservation(reservationId: ID!): Reservation
 
-    addCar(name: String!, model: String!, year: Int!): Car
+    addCar(carInfo: Info): Car
 
-    updateCar(carId: ID!, name: String, model: String, year: Int): Car
+    updateCar(carId: ID!, carInfo: Info): Car
 
     deleteCar(carId: ID!): Car
   }
