@@ -1,7 +1,7 @@
 const { User, Car, Reservation } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
-const userResolvers = {
+const resolvers = {
   Query: {
     users: async () => {
      return User.find().populate('reservations')
@@ -101,4 +101,4 @@ const userResolvers = {
   },
 };
 
-module.exports = userResolvers;
+module.exports = resolvers;

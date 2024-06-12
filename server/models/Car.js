@@ -1,5 +1,4 @@
-const { Schema } = require("mongoose");
-
+const { Schema, model } = require("mongoose");
 // THIS WILL NEED TO BE A MODEL
 const carSchema = new Schema({
   make: {
@@ -35,6 +34,7 @@ const carSchema = new Schema({
   },
 });
 // make this a model
-const Car = model('Car', carSchema);
+const 
+Car = model('Car', carSchema);
 
 module.exports = Car;

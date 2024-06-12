@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "seed": "node server/seeds/seed.js",
+    "seed": "node server/seeders/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,6 +14,7 @@
     "@graphql-tools/merge": "^9.0.4",
     "apollo-server-express": "^3.13.0",
     "graphql": "^16.8.1",
+    "mongoose": "^8.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.23.1"
