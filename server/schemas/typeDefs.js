@@ -17,7 +17,6 @@ type User {
     carId: String!
     year: Int!
     type: String!
-    mileage: String!
     image: String
   }
 
@@ -42,7 +41,6 @@ type User {
     stock: String!
     year: Int!
     type: String!
-    mileage: String!
     image: String
   }
 
