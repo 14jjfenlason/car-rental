@@ -3,11 +3,11 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    users: async () => {
+  users: async () => {
      return User.find().populate('reservations')
     },
-    user: async (parent,{name}) => { 
-      return User.findOne({ name }).populate('reservations');
+    user: async (parent,{username}) => { 
+      return User.findOne({ username }).populate('reservations');
   },
     cars: async () => { 
       return Car.find();
@@ -27,18 +27,14 @@ const resolvers = {
     
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-
       if (!user) {
         throw new AuthenticationError;
       }
-
       const correctPw = await user.isCorrectPassword(password);
-
       if (!correctPw) {
         throw new AuthenticationError;
       }
       const token = signToken(user);
-
       return { token, user };
     },
 
@@ -60,11 +56,13 @@ const resolvers = {
       User.findOneAndDelete({ _id: userId })
     },
 
-    addReservation: async (parent, {}) => {
-      const reservation = new Reservation.create(args);
-      return await User.findOneAndUpdate(
-        { }
+    addReservation: async (parent, {reservationId, startDate, endDate}) => {
+      const reservation = await Reservation.create(
+        { _id: reservationId },
+        { startDate, endDate },
+        { new: true, runValidators: true }
       );
+      return reservation;
     },
 
     updateReservation: async (
@@ -82,15 +80,15 @@ const resolvers = {
       Reservation.findOneAndDelete({ _id: reservationId })
     },
 
-    addCar: async (parent, { name, model, year }) => {
-      const car = new Car({ name, model, year });
-      return await car.save();
+    addCar: async (parent, args) => {
+      const car = await Car.create(args);
+      return  save(car);
     },
 
-    updateCar: async (parent, { carId, name, model, year }) => {
+    updateCar: async (parent, args) => {
       return await Car.findOneAndUpdate(
-        { _id: carId },
-        { name, model, year },
+        { _id: args.carId },
+        { carInfo: args.Info },
         { new: true, runValidators: true }
       );
     },

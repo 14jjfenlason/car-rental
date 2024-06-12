@@ -18,7 +18,7 @@
     "year": 2019,
     "type": "Sedan",
     "mileage": "15000",
-    "image": "path/to/img.jpg"
+    "image": "client/src/assets/images/blackJeep.jpg"
   },
 
   {
