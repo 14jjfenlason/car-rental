@@ -13,6 +13,11 @@ const carSchema = new Schema({
     required: true,
   },
 
+  year: {
+    type: Int,
+    required: true,
+  },
+
   stock: {
     type: String,
     require: true,

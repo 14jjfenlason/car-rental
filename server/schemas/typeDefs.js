@@ -1,24 +1,26 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  reservation: [ Reservation ]
+}
+
   type Car {
     id: ID!
-    name: String!
+    make: String!
     model: String!
+    stock: String!
+    mileage: String!
     year: Int!
   }
 
-  type User {
+  type Reservation {
     id: ID!
-    name: String!
-    email: String!
-    password: String!
-  }
-
-  type Booking {
-    id: ID!
-    userId: ID!
-    carId: ID!
+    reservationId: [Car]!
     startDate: String!
     endDate: String!
   }
@@ -29,25 +31,34 @@ const typeDefs = gql`
   }
 
   type Query {
+    users: [User]
+    user(name: String ): User
     cars: [Car]
     car(carId: ID!): Car
-    users: [User]
-    user(userId: ID!): User
-    bookings: [Booking]
-    booking(bookingId: ID!): Booking
+    reservations: [Reservation]
+    reservation(reservationId: ID!): Reservation
   }
 
   type Mutation {
-    addCar(name: String!, model: String!, year: Int!): Car
-    updateCar(carId: ID!, name: String, model: String, year: Int): Car
-    deleteCar(carId: ID!): Car
-    addUser(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+
+    addUser(name: String!, email: String!, password: String!): Auth
+
     updateUser(userId: ID!, name: String, email: String): User
+
     deleteUser(userId: ID!): User
-    addBooking(userId: ID!, carId: ID!, startDate: String!, endDate: String!): Booking
-    updateBooking(bookingId: ID!, startDate: String, endDate: String): Booking
-    deleteBooking(bookingId: ID!): Booking
+
+    addReservation(userId: ID!, reservationId: ID!, startDate: String!, endDate: String!): Reservation
+
+    updateReservation(reservationId: ID!, startDate: String, endDate: String): Reservation
+
+    deleteReservation(reservationId: ID!): Reservation
+
+    addCar(name: String!, model: String!, year: Int!): Car
+
+    updateCar(carId: ID!, name: String, model: String, year: Int): Car
+
+    deleteCar(carId: ID!): Car
   }
 `;
 
