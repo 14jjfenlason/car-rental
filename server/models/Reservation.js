@@ -5,24 +5,22 @@ const dateFormat = require('../utils/dateFormat');
 
 const reservationSchema = new Schema({
 
-    reservationId: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: 'Car',
-        },
-      ],
-    startDate: {
-        type: Date,
-        default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
-        require: true,
-    },
-    endDate: {
-        type: Date,
-        default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
-        require: true,
-    }
+  car: {
+    type: Schema.Types.ObjectId,
+    ref: 'Car',
+  },
+  startDate: {
+    type: Date,
+    default: Date.now,
+    get: (timestamp) => dateFormat(timestamp),
+    require: true,
+  },
+  endDate: {
+    type: Date,
+    default: Date.now,
+    get: (timestamp) => dateFormat(timestamp),
+    require: true,
+  }
 
 })
 
