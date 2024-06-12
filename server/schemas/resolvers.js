@@ -78,7 +78,7 @@ const userResolvers = {
       );
     },
 
-    deleteResevation: async (parent, { reservationId }) =>{
+    deleteReservation: async (parent, { reservationId }) =>{
       Reservation.findOneAndDelete({ _id: reservationId })
     },
 

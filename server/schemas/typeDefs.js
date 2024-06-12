@@ -18,7 +18,6 @@ type User {
     carId: String!
     year: Int!
     type: String!
-    mileage: String!
     image: String
   }
 
@@ -63,6 +62,7 @@ type User {
     updateCar(carId: ID!, name: String, model: String, year: Int): Car
 
     deleteCar(carId: ID!): Car
+    
   }
 `;
 
