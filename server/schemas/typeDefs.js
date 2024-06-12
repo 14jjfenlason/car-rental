@@ -12,10 +12,16 @@ type User {
   type Car {
     id: ID!
     make: String!
+    make: String!
     model: String!
     stock: String!
     mileage: String!
+    carId: String!
+    stock: String!
     year: Int!
+    type: String!
+    mileage: String!
+    image: String
   }
 
   type Reservation {
