@@ -18,8 +18,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    // set savedBooks to be an array of data that adheres to the bookSchema
-    // savedCars: [carSchema],
     reservations: [
       {
         type: Schema.Types.ObjectId,
@@ -27,7 +25,7 @@ const userSchema = new Schema(
       }
     ]
   },
-  // set this to use virtual below
+  
   {
     toJSON: {
       virtuals: true,
@@ -42,15 +40,15 @@ const userSchema = new Schema(
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
 
-  next();
-});
 
-// custom method to compare and validate password for logging in
+//   next();
+// });
+
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
+
 userSchema.virtual("savedCars").get(function () {
   return this.savedCars.length;
 });
