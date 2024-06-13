@@ -21,9 +21,13 @@ const userSchema = new Schema(
     reservations: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Reservation'  // Ensure the reference matches the model name
+        ref: 'Reservation'
       }
-    ]
+    ],
+    isAdmin: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     toJSON: {

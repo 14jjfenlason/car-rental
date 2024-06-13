@@ -2,29 +2,28 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 type User {
-  id: ID!
+  _id: ID!
   username: String!
   email: String!
-  password: String!
-  reservation: [ Reservation ]
+  reservations: [ Reservation ]
 }
 
   type Car {
-    id: ID!
-    make: String!
-    model: String!
-    mileage: String!
-    carId: String!
-    year: Int!
-    type: String!
+    _id: ID!
+    make: String
+    model: String
+    mileage: String
+    carId: String
+    year: Int
+    type: String
     image: String
   }
 
   type Reservation {
-    id: ID!
-    reservationId: [Car]!
-    startDate: String!
-    endDate: String!
+    _id: ID!
+    car: Car
+    startDate: String
+    endDate: String
   }
 
   type Auth {
@@ -33,7 +32,6 @@ type User {
   }
 
   input Info {
-    id: ID!
     make: String!
     model: String!
     mileage: String!
@@ -46,7 +44,7 @@ type User {
 
   type Query {
     users: [User]
-    user(username: String ): User
+    me: User
     cars: [Car]
     car(carId: ID!): Car
     reservations: [Reservation]
@@ -62,7 +60,7 @@ type User {
 
     deleteUser(userId: ID!): User
 
-    addReservation(userId: ID!, reservationId: ID!, startDate: String!, endDate: String!): Reservation
+    addReservation(car: String!, startDate: String!, endDate: String!): Reservation
 
     updateReservation(reservationId: ID!, startDate: String, endDate: String): Reservation
 
