@@ -1,11 +1,7 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const CREATE_RESERVATION = gql`
-  mutation createReservation(
-    $carId: ID!
-    $startDate: String!
-    $endDate: String!
-  ) {
+  mutation CreateReservation($carId: ID!, $startDate: String!, $endDate: String!) {
     createReservation(carId: $carId, startDate: $startDate, endDate: $endDate) {
       id
       carId
@@ -40,30 +36,20 @@ export const LOGIN_USER = gql`
 `;
 
 export const UPDATE_RESERVATION = gql`
-  mutation updateReservation(
-    $reservationId: ID!
-    $startDate: String!
-    $endDate: String!
-  ) {
-    updateReservation(carId: $carId, startDate: $startDate, endDate: $endDate) {
-      id
-      carId
+  mutation UpdateReservation($reservationId: ID!, $startDate: String, $endDate: String) {
+    updateReservation(id: $reservationId, startDate: $startDate, endDate: $endDate) {
+      _id
       startDate
       endDate
     }
   }
 `;
+
 export const DELETE_RESERVATION = gql`
-  mutation deleteReservation(
-    $reservationId: ID!
-    $startDate: String!
-    $endDate: String!
-    ) {
-    deleteReservation(carId: $carId
-    startDate: $startDate, 
-    endDate: $endDate
-    ) {
-    
+  mutation DeleteReservation($reservationId: ID!) {
+    deleteReservation(id: $reservationId) {
+      _id
     }
   }
 `;
+

@@ -4,14 +4,16 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async (_, args, context) => {
-      if (context.user.isAdmin){
-        return User.find().populate('reservations')
+      if (context.user.isAdmin) {
+        return User.find().populate('reservations');
       }
+      throw new AuthenticationError('Not authorized');
     },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('reservations');
       }
+      throw new AuthenticationError('Not authenticated');
     },
     cars: async () => {
       return Car.find();
@@ -23,32 +25,36 @@ const resolvers = {
       if (context.user.isAdmin) {
         return Reservation.find();
       }
-      throw AuthenticationError
+      throw new AuthenticationError('Not authorized');
     },
     reservation: async (parent, { reservationId }) => {
-      return Reservation.findOne({ _id: reservationId }).populate('car')
+      return Reservation.findOne({ _id: reservationId }).populate('car');
     },
   },
 
   Mutation: {
-
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {
-        throw new AuthenticationError;
+        throw new AuthenticationError('Invalid email or password');
       }
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
-        throw new AuthenticationError;
+        throw new AuthenticationError('Invalid email or password');
       }
       const token = signToken(user);
       return { token, user };
     },
 
     addUser: async (parent, args) => {
-      const user = await User.create(args);
-      const token = signToken(user);
-      return { token, user };
+      try {
+        const user = await User.create(args);
+        const token = signToken(user);
+        return { token, user };
+      } catch (err) {
+        console.error('Error creating user:', err);
+        throw new Error('Failed to create user');
+      }
     },
 
     // updateUser: async (parent, { userId, name, email }) => {
@@ -66,32 +72,30 @@ const resolvers = {
     addReservation: async (parent, args, context) => {
       if (context.user) {
         const reservation = await Reservation.create(args);
-
-        const updateUser = await User.findOneAndUpdate(
+        await User.findOneAndUpdate(
           { _id: context.user._id },
           { $push: { reservations: reservation._id } },
           { new: true }
-        )
-
-      
+        );
         return reservation;
-
       }
-      throw AuthenticationError
+      throw new AuthenticationError('Not authenticated');
     },
 
     updateReservation: async (parent, args, context) => {
-      if (context.user){
-        const reservation = await Reservation.findOneAndUpdate(args);
-      // return await Reservation.findOneAndUpdate(
-      //   { _id: reservationId },
-      //   { startDate, endDate },
-      //   { new: true, runValidators: true }
-      // );
-    }
-  },
+      if (context.user) {
+        const reservation = await Reservation.findOneAndUpdate(
+          { _id: args.reservationId },
+          args,
+          { new: true, runValidators: true }
+        );
+        return reservation;
+      }
+      throw new AuthenticationError('Not authenticated');
+    },
+
     deleteReservation: async (parent, { reservationId }) => {
-      return Reservation.findOneAndDelete({ _id: reservationId })
+      return Reservation.findOneAndDelete({ _id: reservationId });
     },
 
     // addCar: async (parent, args) => {

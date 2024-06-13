@@ -64,7 +64,7 @@ type User {
 
     updateReservation(reservationId: ID!, startDate: String, endDate: String): Reservation
 
-    deleteReservation(reservationId: ID! startDate: String, endDate: String, startDate: String): Reservation
+    deleteReservation(reservationId: ID!, endDate: String): Reservation
 
     addCar(carInfo: Info): Car
 
