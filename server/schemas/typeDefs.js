@@ -10,13 +10,13 @@ type User {
 
   type Car {
     _id: ID!
-    make: String
-    model: String
-    mileage: String
-    carId: String
-    year: Int
-    type: String
-    image: String
+    make: String!
+    model: String!
+    year: Int!
+    type: String!
+    mileage: Int!
+    stock: Int!
+    image: String!
   }
 
   type Reservation {
@@ -45,7 +45,7 @@ type User {
   type Query {
     users: [User]
     me: User
-    cars: [Car]
+    vehicles: [Car]
     car(carId: ID!): Car
     reservations: [Reservation]
     reservation(reservationId: ID!): Reservation
@@ -64,14 +64,14 @@ type User {
 
     updateReservation(reservationId: ID!, startDate: Int!, endDate: Int!): Reservation
 
-    deleteReservation(reservationId: ID!): Reservation
+    deleteReservation(reservationId: ID! startDate: String, endDate: String): Reservation
 
     addCar(carInfo: Info): Car
 
     updateCar(carId: ID!, carInfo: Info): Car
 
     deleteCar(carId: ID!): Car
-    
+
   }
 `;
 

@@ -4,34 +4,35 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async (_, args, context) => {
-      if ( context.user.isAdmin){
+      if (context.user.isAdmin) {
         return User.find().populate('reservations')
       }
+      throw AuthenticationError;
     },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('reservations');
       }
+      throw  AuthenticationError;
     },
-    cars: async () => {
+    vehicles: async () => {
       return Car.find();
     },
     car: async (parent, { carId }) => {
       return Car.findOne({ _id: carId });
     },
     reservations: async (_, args, context) => {
-      if (context.user && context.user.isAdmin) {
+      if (context.user.isAdmin) {
         return Reservation.find();
       }
       throw AuthenticationError;
     },
     reservation: async (parent, { reservationId }) => {
-      return Reservation.findOne({ _id: reservationId }).populate('car')
+      return Reservation.findOne({ _id: reservationId }).populate('car');
     },
   },
 
   Mutation: {
-
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {
@@ -66,22 +67,27 @@ const resolvers = {
       return User.findOneAndDelete({ _id: userId })
     },
 
-    addReservation: async (parent, args, context) => {
+    addReservation: async (parent, { car, startDate, endDate }, context) => {
       if (context.user) {
-        const reservation = await Reservation.create(args);
-
-        const updateUser = await User.findOneAndUpdate(
+        const reservation = await Reservation.create({
+          car,
+          startDate,
+          endDate,
+        });
+        await User.findOneAndUpdate(
           { _id: context.user._id },
           { $push: { reservations: reservation._id } },
           { new: true }
         )
+
+      
         return reservation;
       }
       throw AuthenticationError
     },
 
-    updateReservation: async (parent, args, context ) => {
-       if (context.user) {
+    updateReservation: async (parent, args, context) => {
+      if (context.user) {
         const reservation = await Reservation.findOneAndUpdate(
           { _id: args.reservationId },
           {startDate: args.startDate, endDate: args.endDate },
@@ -90,9 +96,9 @@ const resolvers = {
         return reservation;
        }
       },
-
+  
     deleteReservation: async (parent, { reservationId }) => {
-      return Reservation.findOneAndDelete({ _id: reservationId })
+      return Reservation.findOneAndDelete({ _id: reservationId });
     },
 
     // addCar: async (parent, args) => {
