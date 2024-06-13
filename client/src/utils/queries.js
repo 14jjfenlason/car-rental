@@ -27,3 +27,18 @@ export const GET_ALL_CARS = gql`
     }
   }
 `;
+
+export const GET_ALL_VEHICLES = gql`
+  query GetAllVehicles {
+    vehicles {
+      _id
+      make
+      model
+      year
+      type
+      mileage
+      stock
+      image
+    }
+  }
+`;

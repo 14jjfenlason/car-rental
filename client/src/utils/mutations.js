@@ -1,12 +1,12 @@
-import { gql } from "@apollo/client";
-export const LOGIN_USER = gql`
-  mutation login( $username: $email: String!, $password: String!) {
-    login( username: $username, email: $email, password: $password) {
-      token
-      user {
-        _id
-        username
-      }
+import { gql } from '@apollo/client';
+
+export const CREATE_RESERVATION = gql`
+  mutation CreateReservation($carId: ID!, $startDate: String!, $endDate: String!) {
+    createReservation(carId: $carId, startDate: $startDate, endDate: $endDate) {
+      id
+      carId
+      startDate
+      endDate
     }
   }
 `;
@@ -23,34 +23,28 @@ export const ADD_USER = gql`
   }
 `;
 
-export const CREATE_RESERVATION = gql`
-  mutation createReservation(
-    $carId: ID!
-    $startDate: String!
-    $endDate: String!
-  ) {
-    createReservation(carId: $carId, startDate: $startDate, endDate: $endDate) {
-      id
-      carId
-      startDate
-      endDate
+export const LOGIN_USER = gql`
+  mutation loginUser($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
     }
   }
 `;
+
 export const UPDATE_RESERVATION = gql`
-  mutation updateReservation(
-    $reservationId: ID!
-    $startDate: String!
-    $endDate: String!
-  ) {
-    updateReservation(carId: $carId, startDate: $startDate, endDate: $endDate) {
-      id
-      carId
+  mutation UpdateReservation($reservationId: ID!, $startDate: String, $endDate: String) {
+    updateReservation(id: $reservationId, startDate: $startDate, endDate: $endDate) {
+      _id
       startDate
       endDate
     }
   }
 `;
+
 export const DELETE_RESERVATION = gql`
   mutation deleteReservation (
     $reservationId: ID!
@@ -65,3 +59,4 @@ export const DELETE_RESERVATION = gql`
     }
   }
 `;
+
