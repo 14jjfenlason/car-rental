@@ -21,9 +21,13 @@ const userSchema = new Schema(
     reservations: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'reservation'
+        ref: 'Reservation'
       }
-    ]
+    ],
+    isAdmin: {
+      type: Boolean,
+      default: false
+    }
   },
   
   {

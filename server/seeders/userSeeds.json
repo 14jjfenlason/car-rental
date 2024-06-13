@@ -47,6 +47,7 @@
   {
     "username": "Lernantino",
     "email": "lernantino@techfriends.dev",
-    "password": "password10"
+    "password": "password10",
+    "isAdmin": true
   }
 ]
