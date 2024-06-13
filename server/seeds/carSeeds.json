@@ -7,7 +7,7 @@
     "year": 2020,
     "type": "Sedan",
     "mileage": "10000",
-    "image": "path/to/img.jpg"
+    "image": "client/src/assets/images/pic_1.jpg"
   },
 
   {
@@ -18,7 +18,7 @@
     "year": 2019,
     "type": "Sedan",
     "mileage": "15000",
-    "image": "client/src/assets/images/blackJeep.jpg"
+    "image": "client/src/assets/images/pic_2.jpg"
   },
 
   {
@@ -29,7 +29,7 @@
     "year": 2018,
     "type": "Sedan",
     "mileage": "11000",
-    "image": "path/to/img.jpg"
+    "image": "client/src/assets/images/pic_3.jpg"
   },
 
   {
@@ -40,7 +40,7 @@
     "year": 2015,
     "type": "SUV",
     "mileage": "12000",
-    "image": "path/to/img.jpg"
+    "image": "client/src/assets/images/pic_4.jpg"
   },
 
   {
@@ -51,7 +51,7 @@
     "year": 2020,
     "type": "SUV",
     "mileage": "9000",
-    "image": "path/to/img.jpg"
+    "image": "client/src/assets/images/pic_5.jpg"
   },
 
   {
@@ -62,7 +62,7 @@
     "year": 2018,
     "type": "SUV",
     "mileage": "8000",
-    "image": "path/to/img.jpg"
+    "image": "client/src/assets/images/pic_6.jpg"
   },
   {
     "make": "Toyota",
@@ -72,7 +72,7 @@
     "year": 2020,
     "type": "Truck",
     "mileage": "8000",
-    "image": "path/to/img.jpg"
+    "image": "client/src/assets/images/pic_7.jpg"
   },
 
   {
@@ -83,7 +83,7 @@
     "year": 2019,
     "type": "Truck",
     "mileage": "9000",
-    "image": "path/to/img.jpg"
+    "image": "client/src/assets/images/pic_8.jpg"
   },
 
   {
@@ -94,7 +94,7 @@
     "year": 2018,
     "type": "Truck",
     "mileage": "8500",
-    "image": "path/to/img.jpg"
+    "image": "client/src/assets/images/pic_9.jpg"
   },
 
   {
@@ -105,7 +105,7 @@
     "year": 2020,
     "type": "Van",
     "mileage": "8500",
-    "image": "path/to/img.jpg"
+    "image": "client/src/assets/images/pic_10.jpg"
   },
 
   {
@@ -116,7 +116,7 @@
     "year": 2019,
     "type": "Van",
     "mileage": "8500",
-    "image": "path/to/img.jpg"
+    "image": "client/src/assets/images/pic_11.jpg"
   },
 
   {
@@ -127,6 +127,6 @@
     "year": 2018,
     "type": "Van",
     "mileage": "8500",
-    "image": "path/to/img.jpg"
+    "image": "client/src/assets/images/pic_12.jpg"
   }
 ]
