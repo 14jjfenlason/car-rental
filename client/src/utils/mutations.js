@@ -46,9 +46,16 @@ export const UPDATE_RESERVATION = gql`
 `;
 
 export const DELETE_RESERVATION = gql`
-  mutation DeleteReservation($reservationId: ID!) {
-    deleteReservation(id: $reservationId) {
-      _id
+  mutation deleteReservation (
+    $reservationId: ID!
+    $startDate: Int!
+    $endDate: Int!
+    ) {
+    Reservation(carId: $carId
+    startDate: $Int, 
+    endDate: $Int
+    ) {
+    
     }
   }
 `;
