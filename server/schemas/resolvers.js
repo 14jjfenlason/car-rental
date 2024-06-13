@@ -53,7 +53,7 @@ const resolvers = {
     },
 
     deleteUser: async (parent, { userId }) => {
-      User.findOneAndDelete({ _id: userId })
+      return User.findOneAndDelete({ _id: userId })
     },
 
     addReservation: async (parent, {reservationId, startDate, endDate}) => {
@@ -77,12 +77,12 @@ const resolvers = {
     },
 
     deleteReservation: async (parent, { reservationId }) =>{
-      Reservation.findOneAndDelete({ _id: reservationId })
+      return Reservation.findOneAndDelete({ _id: reservationId })
     },
 
     addCar: async (parent, args) => {
       const car = await Car.create(args);
-      return  save(car);
+      return  car;
     },
 
     updateCar: async (parent, args) => {
@@ -94,7 +94,7 @@ const resolvers = {
     },
 
     deleteCar: async (parent, { carId }) =>{
-      Car.findOneAndDelete({ _id: carId })
+      return Car.findOneAndDelete({ _id: carId })
     },
   },
 };
