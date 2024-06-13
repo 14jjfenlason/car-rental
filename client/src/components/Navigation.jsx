@@ -1,5 +1,6 @@
-import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import Auth from '../utils/auth';
 import './Navigation.css';
 
@@ -10,8 +11,8 @@ const Navigation = () => {
     <nav className="navigation">
       <ul className="nav-list">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/vehicles-for-rent">Vehicles For Rent</Link></li>
-        <li><Link to="/reservation-length">Reservation Length</Link></li>
+        <li><Link to="/vehicles">Vehicles For Rent</Link></li>
+        <li><Link to="/reservations">Reservations </Link></li>
         {loggedIn ? (
           <li><Link to="/" onClick={() => Auth.logout()}>Logout</Link></li>
         ) : (
