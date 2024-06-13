@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
-;
+
 const userSchema = new Schema(
   {
     username: {
@@ -29,7 +29,6 @@ const userSchema = new Schema(
       default: false
     }
   },
-  
   {
     toJSON: {
       virtuals: true,
@@ -37,22 +36,21 @@ const userSchema = new Schema(
   }
 );
 
-// hash user password
-  userSchema.pre("save", async function (next) {
+// hash user password before saving
+userSchema.pre("save", async function (next) {
   if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
-
-
   next();
 });
+
 
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-
+// virtual field for savedCars count
 userSchema.virtual("savedCars").get(function () {
   return this.savedCars.length;
 });
@@ -60,5 +58,3 @@ userSchema.virtual("savedCars").get(function () {
 const User = model("User", userSchema);
 
 module.exports = User;
-
-
