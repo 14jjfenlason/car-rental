@@ -71,7 +71,7 @@ type User {
     updateCar(carId: ID!, carInfo: Info): Car
 
     deleteCar(carId: ID!): Car
-    
+
   }
 `;
 
