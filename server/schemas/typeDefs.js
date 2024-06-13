@@ -10,13 +10,13 @@ const typeDefs = gql`
 
   type Car {
     _id: ID!
-    make: String
-    model: String
-    mileage: String
-    carId: String
-    year: Int
-    type: String
-    image: String
+    make: String!
+    model: String!
+    year: Int!
+    type: String!
+    mileage: Int!
+    stock: Int!
+    image: String!
   }
 
   type Reservation {
@@ -45,7 +45,7 @@ const typeDefs = gql`
   type Query {
     users: [User]
     me: User
-    cars: [Car]
+    vehicles: [Car]
     car(carId: ID!): Car
     reservations: [Reservation]
     reservation(reservationId: ID!): Reservation
