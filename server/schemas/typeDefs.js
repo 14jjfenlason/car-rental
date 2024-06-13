@@ -22,8 +22,8 @@ type User {
   type Reservation {
     _id: ID!
     car: Car
-    startDate: String
-    endDate: String
+    startDate: String!
+    endDate: String!
   }
 
   type Auth {
@@ -56,13 +56,13 @@ type User {
 
     addUser(username: String!, email: String!, password: String!): Auth
 
-    updateUser(userId: ID!, username: String, email: String): User
+    updateUser(userId: ID!, username: String, email: String, password: String): User
 
     deleteUser(userId: ID!): User
 
-    addReservation(car: String!, startDate: String!, endDate: String!): Reservation
+    addReservation(car: String!, startDate: Int!, endDate: Int!): Reservation
 
-    updateReservation(reservationId: ID!, startDate: String, endDate: String): Reservation
+    updateReservation(reservationId: ID!, startDate: Int!, endDate: Int!): Reservation
 
     deleteReservation(reservationId: ID!): Reservation
 

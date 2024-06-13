@@ -4,7 +4,7 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async (_, args, context) => {
-      if (context.user.isAdmin){
+      if ( context.user.isAdmin){
         return User.find().populate('reservations')
       }
     },
@@ -20,10 +20,10 @@ const resolvers = {
       return Car.findOne({ _id: carId });
     },
     reservations: async (_, args, context) => {
-      if (context.user.isAdmin) {
+      if (context.user && context.user.isAdmin) {
         return Reservation.find();
       }
-      throw AuthenticationError
+      throw AuthenticationError;
     },
     reservation: async (parent, { reservationId }) => {
       return Reservation.findOne({ _id: reservationId }).populate('car')
@@ -35,11 +35,11 @@ const resolvers = {
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {
-        throw new AuthenticationError;
+        throw AuthenticationError;
       }
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
-        throw new AuthenticationError;
+        throw AuthenticationError;
       }
       const token = signToken(user);
       return { token, user };
@@ -51,17 +51,20 @@ const resolvers = {
       return { token, user };
     },
 
-    // updateUser: async (parent, { userId, name, email }) => {
-    //   return User.findOneAndUpdate(
-    //     { _id: userId },
-    //     { name, email },
-    //     { new: true, runValidators: true }
-    //   );
-    // },
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: args.userId },
+        { username: args.username, email: args.email, password: args.password},
+        { new: true }
+      )
+      return updatedUser;
+    }
+    },
 
-    // deleteUser: async (parent, { userId }) => {
-    //   return User.findOneAndDelete({ _id: userId })
-    // },
+    deleteUser: async (parent, { userId }) => {
+      return User.findOneAndDelete({ _id: userId })
+    },
 
     addReservation: async (parent, args, context) => {
       if (context.user) {
@@ -72,24 +75,22 @@ const resolvers = {
           { $push: { reservations: reservation._id } },
           { new: true }
         )
-
-      
         return reservation;
-
       }
       throw AuthenticationError
     },
 
-    updateReservation: async (parent, args, context) => {
-      if (context.user){
-        const reservation = await Reservation.findOneAndUpdate(args);
-      // return await Reservation.findOneAndUpdate(
-      //   { _id: reservationId },
-      //   { startDate, endDate },
-      //   { new: true, runValidators: true }
-      // );
-    }
-  },
+    updateReservation: async (parent, args, context ) => {
+       if (context.user) {
+        const reservation = await Reservation.findOneAndUpdate(
+          { _id: args.reservationId },
+          {startDate: args.startDate, endDate: args.endDate },
+          {new: true}
+        )
+        return reservation;
+       }
+      },
+
     deleteReservation: async (parent, { reservationId }) => {
       return Reservation.findOneAndDelete({ _id: reservationId })
     },
