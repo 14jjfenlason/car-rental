@@ -30,7 +30,7 @@ export const GET_ALL_CARS = gql`
 
 export const GET_ALL_VEHICLES = gql`
   query GetAllVehicles {
-    cars {
+    vehicles {
       _id
       make
       model
@@ -38,6 +38,7 @@ export const GET_ALL_VEHICLES = gql`
       type
       mileage
       stock
+      image
     }
   }
 `;

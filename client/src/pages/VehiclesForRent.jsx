@@ -31,6 +31,7 @@ const VehiclesForRent = () => {
               <p>Type: {vehicle.type}</p>
               <p>Mileage: {vehicle.mileage}</p>
               <p>Stock: {vehicle.stock}</p>
+              <img src={vehicle.image} alt={`${vehicle.make} ${vehicle.model}`} />
               <button onClick={() => handleReserve(vehicle._id)}>Reserve</button>
             </li>
           ))}

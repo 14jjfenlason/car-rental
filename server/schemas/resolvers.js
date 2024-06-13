@@ -15,7 +15,7 @@ const resolvers = {
       }
       throw new AuthenticationError('Not authenticated');
     },
-    cars: async () => {
+    vehicles: async () => {
       return Car.find();
     },
     car: async (parent, { carId }) => {
@@ -69,9 +69,13 @@ const resolvers = {
     //   return User.findOneAndDelete({ _id: userId })
     // },
 
-    addReservation: async (parent, args, context) => {
+    addReservation: async (parent, { car, startDate, endDate }, context) => {
       if (context.user) {
-        const reservation = await Reservation.create(args);
+        const reservation = await Reservation.create({
+          car,
+          startDate,
+          endDate,
+        });
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $push: { reservations: reservation._id } },
@@ -81,18 +85,21 @@ const resolvers = {
       }
       throw new AuthenticationError('Not authenticated');
     },
+    
+  
 
-    updateReservation: async (parent, args, context) => {
+    updateReservation: async (parent, { reservationId, startDate, endDate }, context) => {
       if (context.user) {
         const reservation = await Reservation.findOneAndUpdate(
-          { _id: args.reservationId },
-          args,
+          { _id: reservationId },
+          { startDate, endDate },
           { new: true, runValidators: true }
         );
         return reservation;
       }
       throw new AuthenticationError('Not authenticated');
     },
+    
 
     deleteReservation: async (parent, { reservationId }) => {
       return Reservation.findOneAndDelete({ _id: reservationId });
