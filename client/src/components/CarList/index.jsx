@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { GET_ALL_CARS } from "../utils/queries";
+import { GET_ALL_CARS } from "../../utils/queries";
 import CarDetails from ".";
 
 const CarList = () => {
