@@ -12,6 +12,7 @@ const styles = {
     height: "200px",
     width: "400px",
     margin: "auto",
+   
   },
   card: {
     border: "none",
