@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_VEHICLES } from '../utils/queries';
 
+
 const VehiclesForRent = () => {
   const navigate = useNavigate();
   const { loading, error, data } = useQuery(GET_ALL_VEHICLES);
@@ -16,6 +17,8 @@ const VehiclesForRent = () => {
 
   const vehicles = data?.vehicles || [];
 
+
+
   return (
     <div>
       <h1>Vehicles for Rent</h1>
@@ -24,15 +27,24 @@ const VehiclesForRent = () => {
         <p>No vehicles available.</p>
       ) : (
         <ul>
+          
           {vehicles.map((vehicle) => (
             <li key={vehicle._id}>
-              <h3>{vehicle.make} {vehicle.model}</h3>
+              <h3>
+                {vehicle.make} {vehicle.model}
+              </h3>
               <p>Year: {vehicle.year}</p>
               <p>Type: {vehicle.type}</p>
               <p>Mileage: {vehicle.mileage}</p>
               <p>Stock: {vehicle.stock}</p>
-              <img src={vehicle.image} alt={`${vehicle.make} ${vehicle.model}`} />
-              <button onClick={() => handleReserve(vehicle._id)}>Reserve</button>
+              <img 
+                src= {vehicle.image} width={'300px'} height={'200px'} padding={'10px'}
+                alt={`${vehicle.make} ${vehicle.model}`}
+                
+              />
+              <button onClick={() => handleReserve(vehicle._id)}>
+                Reserve
+              </button>
             </li>
           ))}
         </ul>
