@@ -1,13 +1,31 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_RESERVATION = gql`
- mutation AddReservation($car: String!, $startDate: Int!, $endDate: Int!) {
-  addReservation(car: $car, startDate: $startDate, endDate: $endDate) {
-    _id
-    endDate
-    startDate
+  mutation CreateReservation(
+    $car: ID!,
+    $startDate: String!,
+    $endDate: String!,
+    $startTime: String!,
+    $endTime: String!
+  ) {
+    addReservation(
+      car: $car,
+      startDate: $startDate,
+      endDate: $endDate,
+      startTime: $startTime,
+      endTime: $endTime
+    ) {
+      _id
+      car {
+        make
+        model
+      }
+      startDate
+      endDate
+      startTime
+      endTime
+    }
   }
-}
 `;
 
 export const ADD_USER = gql`

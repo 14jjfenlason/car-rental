@@ -1,17 +1,19 @@
 const { User, Car, Reservation } = require("../models");
-const { signToken, AuthenticationError } = require("../utils/auth");
+const { signToken} = require("../utils/auth");
+const { AuthenticationError } = require('apollo-server-express');
+
 
 const resolvers = {
   Query: {
     users: async (_, args, context) => {
-      if (context.user.isAdmin) {
-        return User.find().populate('reservations')
+      if (context.user && context.user.isAdmin) {
+        return User.find().populate("reservations");
       }
       throw AuthenticationError;
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('reservations');
+        return User.findOne({ _id: context.user._id }).populate("reservations");
       }
       throw  AuthenticationError;
     },
@@ -22,13 +24,14 @@ const resolvers = {
       return Car.findOne({ _id: carId });
     },
     reservations: async (_, args, context) => {
-      if (context.user.isAdmin) {
-        return Reservation.find();
+      if (context.user && context.user.isAdmin) {
+        return Reservation.find().populate("car");
       }
+      throw AuthenticationError;
       throw AuthenticationError;
     },
     reservation: async (parent, { reservationId }) => {
-      return Reservation.findOne({ _id: reservationId }).populate('car');
+      return Reservation.findOne({ _id: reservationId }).populate("car");
     },
   },
 
@@ -36,11 +39,11 @@ const resolvers = {
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {
-        throw AuthenticationError;
+        throw new AuthenticationError();
       }
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
-        throw AuthenticationError;
+        throw new AuthenticationError("Incorrect email or password");
       }
       const token = signToken(user);
       return { token, user };
@@ -52,71 +55,68 @@ const resolvers = {
       return { token, user };
     },
 
-    updateUser: async (parent, args, context) => {
-      if (context.user) {
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: args.userId },
-        { username: args.username, email: args.email, password: args.password},
-        { new: true }
-      )
-      return updatedUser;
-    }
+    updateUser: async (parent, { userId, username, email }) => {
+      return User.findOneAndUpdate(
+        { _id: userId },
+        { username, email },
+        { new: true, runValidators: true }
+      );
     },
 
     deleteUser: async (parent, { userId }) => {
-      return User.findOneAndDelete({ _id: userId })
+      return User.findOneAndDelete({ _id: userId });
+    },
+    addReservation: async (parent, args, context) => {
+      if (context.user) {
+        const reservation = await Reservation.create(args);
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { reservations: reservation._id } },
+          { new: true }
+        );
+
+        return reservation;
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
-    addReservation: async (parent, { car, startDate, endDate }, context) => {
+    addReservation: async (parent, { car, startDate, endDate, startTime, endTime }, context) => {
       if (context.user) {
         const reservation = await Reservation.create({
           car,
           startDate,
           endDate,
+          startTime,
+          endTime
         });
+
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $push: { reservations: reservation._id } },
           { new: true }
-        )
+        );
 
-      
-        return reservation;
+        return reservation.populate('car'); // added populate method so when we click reservation it will populate the car that want to be reserved. 
       }
-      throw AuthenticationError
+      throw new AuthenticationError('You need to be logged in');
     },
 
-    updateReservation: async (parent, args, context) => {
-      if (context.user) {
-        const reservation = await Reservation.findOneAndUpdate(
-          { _id: args.reservationId },
-          {startDate: args.startDate, endDate: args.endDate },
-          {new: true}
-        )
-        return reservation;
-       }
-      },
-  
     deleteReservation: async (parent, { reservationId }) => {
       return Reservation.findOneAndDelete({ _id: reservationId });
     },
 
-    // addCar: async (parent, args) => {
-    //   const car = await Car.create(args);
-    //   return car;
-    // },
+    updateCar: async (parent, { carId, carInfo }) => {
+      return Car.findOneAndUpdate(
+        { _id: carId },
+        carInfo,
+        { new: true, runValidators: true }
+      );
+    },
 
-    // updateCar: async (parent, args) => {
-    //   return await Car.findOneAndUpdate(
-    //     { _id: args.carId },
-    //     { carInfo: args.Info },
-    //     { new: true, runValidators: true }
-    //   );
-    // },
-
-    // deleteCar: async (parent, { carId }) => {
-    //   return Car.findOneAndDelete({ _id: carId })
-    // },
+    deleteCar: async (parent, { carId }) => {
+      return Car.findOneAndDelete({ _id: carId });
+    },
   },
 };
 

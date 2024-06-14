@@ -18,7 +18,11 @@ export default function VehiclesForRent() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  
+
+  const vehicles = data?.vehicles || [];
+  console.log(vehicles); // Log vehicles to debug
+
+
   return (
         <div>
         {data.vehicles.map(vehicle=> (
