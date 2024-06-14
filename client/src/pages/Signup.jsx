@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
@@ -70,7 +71,9 @@ const SignUp = () => {
             className="form-input"
           />
         </div>
+        <Link to="/reservations">
         <button type="submit" className="signup-button">Sign Up</button>
+        </Link>
       </form>
       {error && <p className="error-text">Sign up failed</p>}
     </div>

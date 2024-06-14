@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import './Home.css';
@@ -29,7 +30,9 @@ const Home = () => {
           transition={{ duration: 1, delay: 1 }}
           whileHover={{ scale: 1.1 }}
         >
-          Browse Vehicles
+          <Link to="vehicles">
+         <button> Browse Vehicles</button>
+         </Link>
         </motion.a>
       </div>
       <div className="footer">

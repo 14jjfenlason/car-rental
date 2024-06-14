@@ -1,39 +1,63 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
+ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button  from "react-bootstrap/Button";
 import ListGroup from 'react-bootstrap/ListGroup';
+import "./vehicleStyles.css"
 
 
 const styles = {
   image: {
-    height: '25%',
-    width: '25%'
-  }
-}
+    height: "200px",
+    width: "400px",
+    margin: "auto",
+    borderRadius:"15px"
+   
+  },
+  card: {
+    border: "none",
+    textDectoration: "none",
+  },
+  listGroupItem: {
+    border: "none",
+    borderBottom: "none",
+    fontWeight: "bold",
+    textAlign: "center",
+    
+  
+  },
+};
 
-export default function Vehicle({ data, handleReserve }) {
+export default function Vehicle({ data, handleShow }) {
   
   return (
-    <Row >
+    <Row>
       <Col key={data._id}>
-        <Card >
+        <Card className="content" style={styles.card}>
           <Card.Body>
-            <Card.Title>
+            <Card.Title className="text-center">
               {data.make} {data.model}
             </Card.Title>
           </Card.Body>
-          <Card.Img style={styles.image} variant="top" src={data.image}  />
-          <ListGroup className="list-group-flush">
-            <ListGroup.Item>{data.year}</ListGroup.Item>
-            <ListGroup.Item>{data.type}</ListGroup.Item>
-            <ListGroup.Item>{data.mileage}</ListGroup.Item>
-            <ListGroup.Item>{data.stock}</ListGroup.Item>
+          <Card.Img style={styles.image} variant="top" src={data.image} />
+          <ListGroup className="content">
+            <ListGroup.Item style={styles.listGroupItem} className="content">
+              {data.year}
+            </ListGroup.Item>
+            <ListGroup.Item className="content" style={styles.listGroupItem}>
+              {data.type}
+            </ListGroup.Item>
+            <ListGroup.Item className="content" style={styles.listGroupItem}>
+              {data.mileage}
+            </ListGroup.Item>
+            <ListGroup.Item className="content" style={styles.listGroupItem}>
+              {data.stock}
+              <Card.Body className="text-center">
+                <Button onClick={() =>handleShow(data)}>Reserve</Button>
+              </Card.Body>
+            </ListGroup.Item>
           </ListGroup>
-          <Card.Body>
-          <Button onClick={() =>handleReserve(data)}>Reserve</Button>
-          </Card.Body>
         </Card>
       </Col>
     </Row>
