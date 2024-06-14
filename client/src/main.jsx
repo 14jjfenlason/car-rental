@@ -21,26 +21,26 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      // {
-      //   index: true,
-      //   element: <Home/>,
-      // },
+      {
+        index: true,
+        element: <Home/>,
+      },
       {
         path: 'vehicles',
         element: <VehiclesForRent />,
       },
-      // {
-      //   path: 'login',
-      //   element: <Login />,
-      // },
-      // {
-      //   path: 'signup',
-      //   element: <Signup/>
-      // },
-      // {
-      //   path: 'reservations',
-      //   element: <Reservation />
-      // },
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'signup',
+        element: <Signup/>
+      },
+      {
+        path: 'reservations',
+        element: <Reservation />
+      },
     ],
   }
 ]);
