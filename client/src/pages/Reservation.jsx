@@ -5,6 +5,7 @@ import { CREATE_RESERVATION } from '../utils/mutations';
 import { GET_VEHICLES } from '../utils/queries';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 const ReservationLength = () => {
   const location = useLocation();
   const navigate = useNavigate();

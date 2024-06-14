@@ -12,6 +12,7 @@ const styles = {
     height: "200px",
     width: "400px",
     margin: "auto",
+    borderRadius:"15px"
    
   },
   card: {
@@ -34,7 +35,7 @@ export default function Vehicle({ data, handleReserve }) {
     <Row>
       <Col key={data._id}>
         <Card className="content" style={styles.card}>
-          <Card.Body >
+          <Card.Body>
             <Card.Title className="text-center">
               {data.make} {data.model}
             </Card.Title>
@@ -50,9 +51,9 @@ export default function Vehicle({ data, handleReserve }) {
             <ListGroup.Item className="content" style={styles.listGroupItem}>
               {data.mileage}
             </ListGroup.Item>
-            <ListGroup.Item style={styles.listGroupItem} className="content">
+            <ListGroup.Item className="content" style={styles.listGroupItem}>
               {data.stock}
-              <Card.Body className="text-center" >
+              <Card.Body className="text-center">
                 <Button onClick={() => handleReserve(data)}>Reserve</Button>
               </Card.Body>
             </ListGroup.Item>
