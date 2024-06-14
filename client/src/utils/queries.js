@@ -1,32 +1,5 @@
 import { gql } from '@apollo/client';
 
-
-
-export const GET_USERS = gql`
-  query Users {
-  users {
-    _id
-    username
-    email
-    reservations {
-      _id
-      endDate
-      startDate
-      car {
-        _id
-        make
-        model
-        year
-        type
-        mileage
-        stock
-        image
-      }
-    }
-  }
-}
-`;
-
 export const GET_ME = gql`
 query me {
   me {
@@ -101,7 +74,6 @@ query Reservation($reservationId: ID!) {
   }
 }
 `;
-
 export const GET_RESERVATIONS = gql`
 query Reservations {
   reservations {
@@ -121,3 +93,16 @@ query Reservations {
   }
 }
 `
+
+
+
+
+
+
+
+
+
+
+
+
+
