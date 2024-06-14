@@ -11,6 +11,9 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+    user: async (parent, { username }) => {
+      return User.findOne({ username }).populate('reservations');
+    },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("reservations");
@@ -27,7 +30,6 @@ const resolvers = {
       if (context.user && context.user.isAdmin) {
         return Reservation.find().populate("car");
       }
-      throw AuthenticationError;
       throw AuthenticationError;
     },
     reservation: async (parent, { reservationId }) => {

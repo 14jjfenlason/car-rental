@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { CREATE_RESERVATION } from '../utils/mutations';
 import { GET_VEHICLES } from '../utils/queries';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const ReservationLength = () => {
-  const location = useLocation();
+export default function ReservationLength() {
+
   const navigate = useNavigate();
-  const [locationInput, setLocationInput] = useState('');
-  const [carInput, setCarInput] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [startTime, setStartTime] = useState('');
@@ -19,23 +17,11 @@ const ReservationLength = () => {
   const { loading: queryLoading, error: queryError, data } = useQuery(GET_VEHICLES);
   const [createReservation, { loading: mutationLoading }] = useMutation(CREATE_RESERVATION);
 
-  useEffect(() => {
-    const storedLocations = JSON.parse(localStorage.getItem('locations')) || [];
-    setLocationInput(storedLocations[0] || '');
-  }, []);
-
-  const handleLocationChange = (e) => {
-    setLocationInput(e.target.value);
-  };
-
-  const handleCarChange = (e) => {
-    setCarInput(e.target.value);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    if (!locationInput || !carInput || !startDate || !endDate || !startTime || !endTime) {
+    if ( !startDate || !endDate || !startTime || !endTime) {
       setError('All fields are required');
       return;
     }
@@ -43,7 +29,6 @@ const ReservationLength = () => {
     try {
       const { data } = await createReservation({
         variables: {
-          car: carInput,
           startDate,
           endDate,
           startTime,
@@ -53,56 +38,19 @@ const ReservationLength = () => {
   
       console.log('Reservation created:', data);
   
-      const newLocations = [locationInput];
-      localStorage.setItem('locations', JSON.stringify(newLocations));
-  
-      setError('');
-      setConfirmation(`Thank you! Your reservation for the location "${locationInput}" is confirmed. You can pick your car at 2725 No Where to be found Texas.`);
     } catch (error) {
       console.error('Error creating reservation:', error.message);
       setError(`Error creating reservation: ${error.message}`);
     }
   };
 
-  const predefinedLocations = ['Austin, Texas', 'Dallas, Texas', 'Houston, Texas'];
 
   return (
+    <>
     <div className="background-image">
       <div className="container mt-5">
         <h2>Reservation</h2>
         <form onSubmit={handleSubmit} className="form-inline">
-          {/* Location Selection */}
-          <div className="form-group mb-2 mr-2">
-            <label className="sr-only" htmlFor="locationSelect">Location</label>
-            <select
-              className="form-control"
-              id="locationSelect"
-              value={locationInput}
-              onChange={handleLocationChange}
-            >
-              <option value="">Pick-up</option>
-              {predefinedLocations.map((loc, index) => (
-                <option key={index} value={loc}>{loc}</option>
-              ))}
-            </select>
-          </div>
-          {/* Car Selection */}
-          <div className="form-group mb-2 mr-2">
-            <label className="sr-only" htmlFor="carSelect">Car</label>
-            <select
-              className="form-control"
-              id="carSelect"
-              value={carInput}
-              onChange={handleCarChange}
-            >
-              <option value="">Select Car</option>
-              {data?.vehicles.map(vehicle => (
-                <option key={vehicle._id} value={vehicle._id}>
-                  {vehicle.make} {vehicle.model}
-                </option>
-              ))}
-            </select>
-          </div>
           {/* Start Date */}
           <div className="form-group mb-2 mr-2">
             <label className="sr-only" htmlFor="startDate">Pick-up date</label>
@@ -171,16 +119,18 @@ const ReservationLength = () => {
               />
             </div>
           </div>
+          <Link to="/reservations">
           <button type="submit" className="btn btn-primary mb-2" disabled={mutationLoading}>
             {mutationLoading ? 'Submitting...' : 'Reserve'}
           </button>
+          </Link>
         </form>
         {queryError && <p className="text-danger">Error loading cars: {queryError.message}</p>}
         {error && <p className="text-danger">{error}</p>}
         {confirmation && <p className="text-success">{confirmation}</p>}
       </div>
     </div>
+    </>
   );
 };
 
-export default ReservationLength;

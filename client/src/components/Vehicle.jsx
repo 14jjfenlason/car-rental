@@ -13,7 +13,7 @@ const styles = {
   }
 }
 
-export default function Vehicle({ data, handleReserve }) {
+export default function Vehicle({ data, handleShow }) {
   
   return (
     <Row >
@@ -32,7 +32,7 @@ export default function Vehicle({ data, handleReserve }) {
             <ListGroup.Item>{data.stock}</ListGroup.Item>
           </ListGroup>
           <Card.Body>
-          <Button onClick={() =>handleReserve(data)}>Reserve</Button>
+          <Button onClick={() =>handleShow(data)}>Reserve</Button>
           </Card.Body>
         </Card>
       </Col>
