@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { CREATE_RESERVATION } from '../utils/mutations';
-import { GET_ALL_VEHICLES } from '../utils/queries';
+import { GET_VEHICLES } from '../utils/queries';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ReservationLength = () => {
@@ -16,7 +16,7 @@ const ReservationLength = () => {
   const [endTime, setEndTime] = useState('');
   const [confirmation, setConfirmation] = useState('');
   const [error, setError] = useState('');
-  const { loading: queryLoading, error: queryError, data } = useQuery(GET_ALL_VEHICLES);
+  const { loading: queryLoading, error: queryError, data } = useQuery(GET_VEHICLES);
   const [createReservation, { loading: mutationLoading }] = useMutation(CREATE_RESERVATION);
 
   useEffect(() => {

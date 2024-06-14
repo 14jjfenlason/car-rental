@@ -9,13 +9,13 @@ const resolvers = {
       if (context.user && context.user.isAdmin) {
         return User.find().populate("reservations");
       }
-      throw new AuthenticationError('Not authorized');
+      throw AuthenticationError;
     },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("reservations");
       }
-      throw new AuthenticationError('Not authenticated');
+      throw  AuthenticationError;
     },
     vehicles: async () => {
       return Car.find();
@@ -27,6 +27,7 @@ const resolvers = {
       if (context.user && context.user.isAdmin) {
         return Reservation.find().populate("car");
       }
+      throw AuthenticationError;
       throw AuthenticationError;
     },
     reservation: async (parent, { reservationId }) => {
