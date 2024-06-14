@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client';
 import ReservationForm from '../components/ReservationForm/index'
 
 
-import { GET_ME, GET_USER } from '../utils/queries';
+import { GET_ME, GET_USER} from '../utils/queries';
 
 import Auth from '../utils/auth';
 
