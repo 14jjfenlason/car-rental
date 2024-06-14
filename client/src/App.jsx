@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import client from './utils/apolloClient';
 import './App.css';
@@ -23,7 +23,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/vehicles-for-rent" element={<VehiclesForRent />} />
-              <Route path="/reservation-length" element={<PrivateRoute component={ReservationLength} />} />
+              <Route element={<PrivateRoute />}>
+                <Route path="/reservation-length" element={<ReservationLength />} />
+              </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="*" element={<ErrorPage />} />

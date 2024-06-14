@@ -1,5 +1,7 @@
 const { User, Car, Reservation } = require("../models");
-const { signToken, AuthenticationError } = require("../utils/auth");
+const { signToken} = require("../utils/auth");
+const { AuthenticationError } = require('apollo-server-express');
+
 
 const resolvers = {
   Query: {
@@ -78,17 +80,28 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    updateReservation: async (parent, args, context) => {
+    addReservation: async (parent, { car, startDate, endDate, startTime, endTime }, context) => {
       if (context.user) {
-        return Reservation.findOneAndUpdate(
-          { _id: reservationId },
-          { startDate, endDate },
-          { new: true, runValidators: true }
-          );
+        const reservation = await Reservation.create({
+          car,
+          startDate,
+          endDate,
+          startTime,
+          endTime
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { reservations: reservation._id } },
+          { new: true }
+        );
+
+        return reservation.populate('car'); // added populate method so when we click reservation it will populate the car that want to be reserved. 
       }
+      throw new AuthenticationError('You need to be logged in');
     },
+
     deleteReservation: async (parent, { reservationId }) => {
-      return Reservation.findOneAndDelete({ _id: reservationId });
       return Reservation.findOneAndDelete({ _id: reservationId });
     },
 

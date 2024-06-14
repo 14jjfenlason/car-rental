@@ -1,7 +1,5 @@
 import { gql } from '@apollo/client';
 
-
-
 export const GET_CAR_DETAILS = gql`
   query GetCarDetails($id: ID!) {
     car(id: $id) {
