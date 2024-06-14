@@ -33,7 +33,7 @@
   background: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   display: inline-block;
-  margin-top: 20vh; /* Adjust this value to move the content up or down */
+  margin-top: 11vh; /* Adjust this value to move the content up or down */
 }
 
 .home-content h1, .home-content p {
@@ -48,7 +48,7 @@
 }
 
 .home-content p {
-  font-size: 1rem; /* Increased font size */
+  font-size: 2rem; /* Increased font size */
   margin-bottom: 2rem;
 }
 
