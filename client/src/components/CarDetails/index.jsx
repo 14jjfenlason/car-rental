@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CAR_DETAILS } from '../../utils/queries';
 import ReservationForm from '../ReservationForm/index.jsx';
-import style from "../../assets/vehiclesforrent.css"
+
 
 const CarDetails = ({ car }) => {
     const { loading, error, data } = useQuery(GET_CAR_DETAILS, {
