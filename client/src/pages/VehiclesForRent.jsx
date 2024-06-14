@@ -1,56 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Vehicle from '../components/Vehicle';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { GET_ALL_VEHICLES } from '../utils/queries';
+import { GET_VEHICLES } from '../utils/queries';
+import Modal from 'react-bootstrap/Modal';
 
-
-const VehiclesForRent = () => {
+export default function VehiclesForRent() {
+ const [showReservation, setShowReservation] = useState(false);
   const navigate = useNavigate();
-  const { loading, error, data } = useQuery(GET_ALL_VEHICLES);
+  const { loading, error, data} = useQuery(GET_VEHICLES);
 
-  const handleReserve = (vehicleId) => {
-    navigate(`/reservation-length?vehicleId=${vehicleId}`);
+  const handleReserve = (carId) => {
+    console.log(carId);
+    setShowReservation(true);
+    // navigate(`/reservation-length?vehicleId=${vehicleId}`);
   };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-
-  const vehicles = data?.vehicles || [];
-
-
-
+  
   return (
-    <div>
-      <h1>Vehicles for Rent</h1>
-
-      {vehicles.length === 0 ? (
-        <p>No vehicles available.</p>
-      ) : (
-        <ul>
-          
-          {vehicles.map((vehicle) => (
-            <li key={vehicle._id}>
-              <h3>
-                {vehicle.make} {vehicle.model}
-              </h3>
-              <p>Year: {vehicle.year}</p>
-              <p>Type: {vehicle.type}</p>
-              <p>Mileage: {vehicle.mileage}</p>
-              <p>Stock: {vehicle.stock}</p>
-              <img 
-                src= {vehicle.image} width={'300px'} height={'200px'} padding={'10px'}
-                alt={`${vehicle.make} ${vehicle.model}`}
-                
-              />
-              <button onClick={() => handleReserve(vehicle._id)}>
-                Reserve
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-};
-
-export default VehiclesForRent;
+        <div>
+        {data.vehicles.map(vehicle=> (
+         <Vehicle key={vehicle.id} data={vehicle} handleReserve={handleReserve} />
+        ))}
+        {showReservation && (
+          <div style={{display: 'absolute', top: 1}}>
+          <Modal>Show Reservation</Modal>
+          </div>
+          )}
+       </div>
+  )
+}

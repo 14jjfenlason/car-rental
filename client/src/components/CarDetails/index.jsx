@@ -13,14 +13,13 @@ const CarDetails = ({ car }) => {
     if (error) return <p>Error: {error.message}</p>;
   
     const Car = data.Car;
-
-
+  
     return (
       <div>
         <h2>{Car.make} {Car.model}</h2>
         <p>Mileage{Car.dailyRate}</p>
         <p>Year: {Car.year}</p>
-        <p >{Car.image}</p>
+        <p>{Car.image}</p>
         <ReservationForm carId={car.id} />
       </div>
     );

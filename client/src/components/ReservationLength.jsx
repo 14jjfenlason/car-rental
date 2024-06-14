@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { CREATE_RESERVATION } from '../utils/mutations';
 
-const ReservationLength = () => {
+const ReservationLength = ({carId}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState('');
@@ -11,7 +11,6 @@ const ReservationLength = () => {
 
   const [createReservation, { loading, error }] = useMutation(CREATE_RESERVATION);
 
-  const vehicleId = new URLSearchParams(location.search).get('vehicleId');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
