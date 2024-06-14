@@ -1,36 +1,76 @@
 /* Home.css */
 
 .home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
-    background-color: #f8f8f8;
-  }
-  
-  .home-container h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 1rem;
-  }
-  
-  .home-container p {
-    font-size: 1.5rem;
-    color: #666;
-    margin-bottom: 2rem;
-  }
-  
-  .home-container a {
-    text-decoration: none;
-    color: #fff;
-    background-color: #007bff;
-    padding: 0.8rem 1.5rem;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .home-container a:hover {
-    background-color: #0056b3;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Changed from center to flex-start to move content up */
+  height: 97vh;
+  background-image: url('/images/home_page.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: #ffffff; /* Change text color to contrast with the background */
+  position: relative;
+}
+
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1); /* Dark overlay */
+  z-index: 1;
+}
+
+.home-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 20vh; /* Adjust this value to move the content up or down */
+}
+
+.home-content h1, .home-content p {
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.home-content h1 {
+  font-size: 4rem; /* Increased font size */
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.home-content p {
+  font-size: 1rem; /* Increased font size */
+  margin-bottom: 2rem;
+}
+
+.home-container a {
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.home-container a:hover {
+  background-color: #0056b3;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 2rem 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  color: #fff;
+}
