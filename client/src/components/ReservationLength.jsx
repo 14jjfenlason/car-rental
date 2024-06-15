@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
@@ -17,15 +19,14 @@ export default function ReservationLength() {
   const { loading: queryLoading, error: queryError, data } = useQuery(GET_VEHICLES);
   const [createReservation, { loading: mutationLoading }] = useMutation(CREATE_RESERVATION);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if ( !startDate || !endDate || !startTime || !endTime) {
       setError('All fields are required');
       return;
     }
-  
+
     try {
       const { data } = await createReservation({
         variables: {
@@ -35,15 +36,14 @@ export default function ReservationLength() {
           endTime,
         },
       });
-  
+
       console.log('Reservation created:', data);
-  
+
     } catch (error) {
       console.error('Error creating reservation:', error.message);
       setError(`Error creating reservation: ${error.message}`);
     }
   };
-
 
   return (
     <>
@@ -133,4 +133,3 @@ export default function ReservationLength() {
     </>
   );
 };
-
