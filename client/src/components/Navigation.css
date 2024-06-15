@@ -10,7 +10,7 @@
   .nav-list {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
     font-size: 2rem;
     margin: 0;
     padding: 0;
@@ -28,6 +28,6 @@
   }
   
   .nav-list a:hover {
-    color: #ffdd57;
+    color: #e7e6e5;
   }
   

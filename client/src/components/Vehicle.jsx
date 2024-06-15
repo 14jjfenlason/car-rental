@@ -5,6 +5,8 @@ import Row from "react-bootstrap/Row";
 import Button  from "react-bootstrap/Button";
 import ListGroup from 'react-bootstrap/ListGroup';
 import "./vehicleStyles.css"
+import Trasformrwrapper from './Trasformrwrapper';
+
 
 
 const styles = {
@@ -32,6 +34,7 @@ const styles = {
 export default function Vehicle({ data, handleShow }) {
   
   return (
+    <Trasformrwrapper size = {1.3}>
     <Row>
       <Col key={data._id}>
         <Card className="content" style={styles.card}>
@@ -61,6 +64,7 @@ export default function Vehicle({ data, handleShow }) {
         </Card>
       </Col>
     </Row>
+    </Trasformrwrapper>
   );
 }
 
