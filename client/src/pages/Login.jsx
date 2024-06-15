@@ -55,7 +55,7 @@ const Login = () => {
             className="form-input"
           />
         </div>
-        <Link to="/reservations">
+        <Link to="/">
         <button type="submit" className="login-button">Login</button>
         </Link>
       </form>

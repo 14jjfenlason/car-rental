@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
-import './SignUp.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
+import Auth from "../utils/auth";
+import "./SignUp.css";
 
 const SignUp = () => {
   const [formState, setFormState] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
   const [addUser, { error }] = useMutation(ADD_USER);
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,6 +27,7 @@ const SignUp = () => {
       });
 
       Auth.login(data.addUser.token);
+      navigate("/reservations");
     } catch (e) {
       console.error(e);
     }
@@ -71,9 +73,9 @@ const SignUp = () => {
             className="form-input"
           />
         </div>
-        <Link to="/reservations">
-        <button type="submit" className="signup-button">Sign Up</button>
-        </Link>
+        <button type="submit" className="signup-button">
+          Sign Up
+        </button>
       </form>
       {error && <p className="error-text">Sign up failed</p>}
     </div>
