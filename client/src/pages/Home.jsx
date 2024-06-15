@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { GET_VEHICLES } from '../utils/queries';
 import './Home.css';
 
 const Home = () => {
   const navigate = useNavigate();
   const [locationInput, setLocationInput] = useState('');
-  const [vehicleInput, setVehicleInput] = useState('');
-
 
   const [savedLocations, setSavedLocations] = useState([]);
-  const { loading: queryLoading, error: queryError, data } = useQuery(GET_VEHICLES);
 
   useEffect(() => {
-    const storedLocations = JSON.parse(localStorage.getItem('locations')) || ['Austin, Texas', 'Houston, Texas', 'Dallas, Texas'];
+    const storedLocations = JSON.parse(localStorage.getItem('locations')) || [];
     setSavedLocations(storedLocations);
   }, []);
 
@@ -23,16 +18,8 @@ const Home = () => {
     setLocationInput(e.target.value);
   };
 
-  const handleVehicleChange = (e) => {
-    setVehicleInput(e.target.value);
-  };
-
   const handleBrowse = () => {
-    if (vehicleInput) {
-      navigate(`/vehicle/${vehicleInput}`);
-    } else {
-      navigate('/vehicles');
-    }
+    navigate('/vehicles');
   };
 
   return (
@@ -52,8 +39,8 @@ const Home = () => {
         >
           Explore your world with our premium car rental services. Choose the perfect vehicle for your journey and book effortlessly!
         </motion.p>
-        <div className="form-row">
-          <div className="col">
+        <div className="home-form-row">
+          <div className="home-col">
             <select
               className="form-control"
               id="locationSelect"
@@ -69,23 +56,7 @@ const Home = () => {
               ))}
             </select>
           </div>
-          
-          <div className="col">
-            <select
-              className="form-control"
-              id="carSelect"
-              value={vehicleInput}
-              onChange={handleVehicleChange}
-            >
-              <option value="">Select Car</option>
-              {data?.vehicles.map(vehicle => (
-                <option key={vehicle._id} value={vehicle._id}>
-                  {vehicle.make} {vehicle.model}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="col-auto">
+          <div className="home-col-auto">
             <motion.button 
               type="button" 
               className="btn btn-primary"
