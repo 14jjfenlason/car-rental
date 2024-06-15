@@ -24,6 +24,8 @@ query me {
       _id
       endDate
       startDate
+      startTime
+      endTime
       car {
         _id
         make
@@ -75,6 +77,8 @@ query Reservation($reservationId: ID!) {
     _id
     endDate
     startDate
+    startTime
+    endTime
     car {
       _id
       make
@@ -94,6 +98,8 @@ query Reservations {
     _id
     endDate
     startDate
+    startTime
+    endTime
     car {
       _id
       make
