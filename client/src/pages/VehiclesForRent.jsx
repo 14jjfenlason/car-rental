@@ -21,14 +21,13 @@ export default function VehiclesForRent() {
   const handleReserve = (carId) => {
     console.log(carId);
     setShowReservation(true);
-    // navigate(`/reservation-length?vehicleId=${vehicleId}`);
+    navigate('/reservations')
   };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   const vehicles = data?.vehicles || [];
-  console.log(vehicles); // Log vehicles to debug
 
 
   return (

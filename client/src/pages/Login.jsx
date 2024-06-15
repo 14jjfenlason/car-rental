@@ -6,6 +6,7 @@ import Auth from '../utils/auth';
 import './Login.css';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN_USER);
 
@@ -20,8 +21,9 @@ const Login = () => {
       const { data } = await login({
         variables: { ...formState },
       });
-
+      console.log(data)
       Auth.login(data.login.token);
+      navigate('/reservations');
     } catch (e) {
       console.error(e);
     }
@@ -55,9 +57,8 @@ const Login = () => {
             className="form-input"
           />
         </div>
-        <Link to="/reservations">
         <button type="submit" className="login-button">Login</button>
-        </Link>
+        
       </form>
       {error && <p className="error-text">Login failed</p>}
     </div>
