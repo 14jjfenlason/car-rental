@@ -34,7 +34,7 @@ const styles = {
 export default function Vehicle({ data, handleShow }) {
   
   return (
-    <Trasformrwrapper size = {1.3}>
+    <Trasformrwrapper size = {1.1}>
     <Row>
       <Col key={data._id}>
         <Card className="content" style={styles.card}>
@@ -66,5 +66,7 @@ export default function Vehicle({ data, handleShow }) {
     </Row>
     </Trasformrwrapper>
   );
+
+  
 }
 
