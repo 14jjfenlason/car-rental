@@ -6,6 +6,7 @@ import Auth from "../utils/auth";
 import "./SignUp.css";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     username: "",
     email: "",
@@ -25,9 +26,8 @@ const SignUp = () => {
       const { data } = await addUser({
         variables: { ...formState },
       });
-
       Auth.login(data.addUser.token);
-      navigate("/reservations");
+      navigate('/reservations')
     } catch (e) {
       console.error(e);
     }
@@ -73,9 +73,9 @@ const SignUp = () => {
             className="form-input"
           />
         </div>
-        <button type="submit" className="signup-button">
-          Sign Up
-        </button>
+      
+        <button type="submit" className="signup-button">Sign Up</button>
+       
       </form>
       {error && <p className="error-text">Sign up failed</p>}
     </div>
