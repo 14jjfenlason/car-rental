@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "@apollo/client";
-
 import ReservationForm from "./index";
 import { GET_ME } from "../../utils/queries";
 

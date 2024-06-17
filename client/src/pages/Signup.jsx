@@ -6,9 +6,9 @@ import './SignUp.css';
 
 const SignUp = () => {
   const [formState, setFormState] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
   const [addUser, { error }] = useMutation(ADD_USER);
 
@@ -25,7 +25,7 @@ const SignUp = () => {
       });
       Auth.login(data.addUser.token);
     } catch (e) {
-      console.error(e);
+      console.error("Sign up error:", e);
     }
   };
 
@@ -69,9 +69,10 @@ const SignUp = () => {
             className="form-input"
           />
         </div>
-      
-        <button type="submit" className="signup-button">Sign Up</button>
-       
+
+        <button type="submit" className="signup-button">
+          Sign Up
+        </button>
       </form>
       {error && <p className="error-text">Sign up failed</p>}
     </div>
