@@ -13,7 +13,6 @@ const SignUp = () => {
     password: "",
   });
   const [addUser, { error }] = useMutation(ADD_USER);
-  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,10 +25,10 @@ const SignUp = () => {
       const { data } = await addUser({
         variables: { ...formState },
       });
-      Auth.login(data.addUser.token);
-      navigate('/reservations')
+      Auth.login(data.addUser.token); // Store token in local storage
+      navigate("/reservations"); // Redirect to reservations page after successful sign-up
     } catch (e) {
-      console.error(e);
+      console.error("Sign up error:", e);
     }
   };
 
@@ -73,9 +72,10 @@ const SignUp = () => {
             className="form-input"
           />
         </div>
-      
-        <button type="submit" className="signup-button">Sign Up</button>
-       
+
+        <button type="submit" className="signup-button">
+          Sign Up
+        </button>
       </form>
       {error && <p className="error-text">Sign up failed</p>}
     </div>

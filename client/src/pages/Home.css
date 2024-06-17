@@ -74,3 +74,9 @@
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
   color: #fff;
 }
+button{background-color: #007bff;
+  border:none;
+  color:#fff;
+  font-weight:bold
+
+}

@@ -35,7 +35,7 @@ const Home = () => {
         </motion.a>
       </div>
       <div className="footer">
-        <p>&copy; 2023 Car Rental Service. All rights reserved.</p>
+        <p>&copy; 2024 Car Rental Service. All rights reserved.</p>
       </div>
     </div>
   );
