@@ -1,12 +1,10 @@
-import './App.css';
-import {
-  ApolloProvider,
-} from '@apollo/client';
-import client from './utils/apolloClient';
+import "./App.css";
+import { ApolloProvider } from "@apollo/client";
+import client from "./utils/apolloClient";
 
-import { Outlet } from 'react-router-dom';
-import Navbar from './components/Navigation';
-import Footer from './components/Footer';
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navigation";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -20,4 +18,3 @@ function App() {
 }
 
 export default App;
-
