@@ -24,20 +24,20 @@ query me {
       _id
       endDate
       startDate
-      startTime
-      endTime
       car {
         _id
-        make
-        model
-        year
-        type
-        mileage
-        stock
         image
+        make
+        mileage
+        model
+        stock
+        type
+        year
       }
+      endTime
+      startTime
     }
-  }
+  }  
 }
 `;
 
