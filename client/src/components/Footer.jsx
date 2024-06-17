@@ -6,7 +6,7 @@ const footerStyle = {
   color: "white",
   display: "flex",
   justifyContent: "center",
-  padding: "1rem",
+  padding: "1.5rem",
 };
 
 export default function Footer() {

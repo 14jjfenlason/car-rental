@@ -44,8 +44,4 @@ Github Repo Link: https://github.com/14jjfenlason/car-rental
 
 ## Screenshot
 
-![alt text](<Screenshot 2024-06-16 202004.png>)
-
-
-
-![alt text](image.png)
+![alt text](<Screenshot 2024-06-17 095855.png>)
