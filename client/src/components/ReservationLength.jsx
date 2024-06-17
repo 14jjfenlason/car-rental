@@ -1,96 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation } from '@apollo/client';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
 
-import { CREATE_RESERVATION } from '../utils/mutations';
-import { GET_RESERVATION, GET_ME, GET_VEHICLES } from '../utils/queries';
+import { CREATE_RESERVATION } from "../utils/mutations";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
-export default function ReservationLength() {
+export default function ReservationLength({ car }) {
+  console.log("this is on the reservation length component", car);
 
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
-    startDate: '',
-    endDate: '',
-    startTime: '',
-    endTime: '',
+    startDate: "",
+    endDate: "",
+    startTime: "",
+    endTime: "",
   });
-  const [carInput, setCarInput] = useState('');
 
-  const { loading: queryLoading, error: queryError, data } = useQuery(GET_VEHICLES);
-  const [CreateReservation, { error }] = useMutation(
-    CREATE_RESERVATION, {
-      refetchQueries: [
-        GET_RESERVATION,
-        'getReservation',
-        GET_ME,
-        'me',
-        GET_VEHICLES,
-        'vehicles'
-      ]
-    });
-  
-  useEffect(() => {
-    // Retrieve saved data from local storage
-    const savedCar = localStorage.getItem('selectedCar');
-    const savedLocation = localStorage.getItem('selectedLocation');
-    const savedUser = localStorage.getItem('user');
+  const [CreateReservation, { error }] = useMutation(CREATE_RESERVATION);
 
-    console.log('Saved Car:', savedCar);
-    console.log('Saved Location:', savedLocation);
-    console.log('Saved User:', savedUser);
-
-    if (savedCar) {
-      setCarInput(JSON.parse(savedCar));
-    }
-    // Assuming you have saved these in localStorage
-    // If not, these can be used when implementing the user and location logic
-    if (savedLocation) {
-      // Set location data here if needed
-    }
-    if (savedUser) {
-      // Set user data here if needed
-    }
-  }, []);
-  
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormState({ ...formState, [name]: value });
+
+    if (name === "startDate") {
+      setFormState({ ...formState, [name]: value });
+    } else if (name === "endDate") {
+      setFormState({ ...formState, [name]: value });
+    } else if (name === "startTime") {
+      setFormState({ ...formState, [name]: value });
+    } else {
+      setFormState({ ...formState, [name]: value });
+    }
   };
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    if (!formState.startDate || !formState.endDate || !formState.startTime || !formState.endTime || !carInput) {
-      console.log('All fields are required');
+
+    if (!startDate || !endDate || !startTime || !endTime) {
+      setError("All fields are required");
       return;
     }
 
-    console.log("Form State:", formState);
-    console.log("Selected Car:", carInput);
-
     try {
       const { data } = await CreateReservation({
-        variables: { ...formState, car: carInput },
+        variables: { ...formState, car: car },
       });
 
-      setFormState({
-        startDate: '',
-        endDate: '',
-        startTime: '',
-        endTime: '',
-      });
-      console.log(data);
-
-      // Clear local storage after submission
-      localStorage.removeItem('selectedCar');
-      navigate('/reservations');
+ 
+      
     } catch (error) {
       console.log("Mutation Error:", error);
     }
+    navigate("/reservations");
   };
 
   return (
@@ -101,14 +66,17 @@ export default function ReservationLength() {
           {Auth.loggedIn() ? (
             <>
               <form onSubmit={handleSubmit} className="form-inline">
+                {/* Start Date */}
                 <div className="form-group mb-2 mr-2">
-                  <label className="sr-only" htmlFor="startDate">Pick-up date</label>
+                  <label className="sr-only" htmlFor="startDate">
+                    Pick-up date
+                  </label>
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">Pick-up date</span>
                     </div>
                     <input
-                      name='startDate'
+                      name="startDate"
                       type="date"
                       className="form-control"
                       id="startDate"
@@ -117,14 +85,17 @@ export default function ReservationLength() {
                     />
                   </div>
                 </div>
+                {/* End Date */}
                 <div className="form-group mb-2 mr-2">
-                  <label className="sr-only" htmlFor="endDate">Drop-off date</label>
+                  <label className="sr-only" htmlFor="endDate">
+                    Drop-off date
+                  </label>
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">Drop-off date</span>
                     </div>
                     <input
-                      name='endDate'
+                      name="endDate"
                       type="date"
                       className="form-control"
                       id="endDate"
@@ -133,14 +104,17 @@ export default function ReservationLength() {
                     />
                   </div>
                 </div>
+                {/* Start Time */}
                 <div className="form-group mb-2 mr-2">
-                  <label className="sr-only" htmlFor="startTime">Pick-up time</label>
+                  <label className="sr-only" htmlFor="startTime">
+                    Pick-up time
+                  </label>
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">Pick-up time</span>
                     </div>
                     <input
-                      name='startTime'
+                      name="startTime"
                       type="time"
                       className="form-control"
                       id="startTime"
@@ -149,14 +123,17 @@ export default function ReservationLength() {
                     />
                   </div>
                 </div>
+                {/* End Time */}
                 <div className="form-group mb-2 mr-2">
-                  <label className="sr-only" htmlFor="endTime">Drop-off time</label>
+                  <label className="sr-only" htmlFor="endTime">
+                    Drop-off time
+                  </label>
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">Drop-off time</span>
                     </div>
                     <input
-                      name='endTime'
+                      name="endTime"
                       type="time"
                       className="form-control"
                       id="endTime"
@@ -165,15 +142,17 @@ export default function ReservationLength() {
                     />
                   </div>
                 </div>
-                <button type="submit" className="btn btn-primary mb-2">
+
+                <button type="submit" onClick={handleSubmit}  className="btn btn-primary mb-2">
                   submit
                 </button>
               </form>
             </>
           ) : (
             <p>
-              You need to be logged in to share your thoughts. Please{' '}
-              <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+              You need to be logged in to share your thoughts. Please{" "}
+              <Link to="/login">login</Link> or{" "}
+              <Link to="/signup">signup.</Link>
             </p>
           )}
         </div>

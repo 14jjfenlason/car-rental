@@ -10,13 +10,13 @@ const reservationSchema = new Schema({
   startDate: {
     type: Date,
     default: Date.now,
-    // get: (timestamp) => dateFormat(timestamp),
+    get: (timestamp) => dateFormat(timestamp),
     require: true,
   },
   endDate: {
     type: Date,
     default: Date.now,
-    // get: (timestamp) => dateFormat(timestamp),
+    get: (timestamp) => dateFormat(timestamp),
     require: true,
   },
   startTime: {

@@ -25,16 +25,16 @@ const Home = () => {
   return (
     <div className="home-container">
       <div className="home-content">
-        <motion.h1 
-          initial={{ opacity: 0, y: -50 }} 
-          animate={{ opacity: 1, y: 0 }} 
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
           Welcome to Rent & Ride Adventures
         </motion.h1>
-        <motion.p 
-          initial={{ opacity: 0, y: 50 }} 
-          animate={{ opacity: 1, y: 0 }} 
+        <motion.p
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
           Explore your world with our premium car rental services. Choose the perfect vehicle for your journey and book effortlessly!

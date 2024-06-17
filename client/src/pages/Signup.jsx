@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import './SignUp.css';
 
 const SignUp = () => {
-  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     username: '',
     email: '',
@@ -26,7 +24,6 @@ const SignUp = () => {
         variables: { ...formState },
       });
       Auth.login(data.addUser.token);
-      navigate('/reservations')
     } catch (e) {
       console.error(e);
     }

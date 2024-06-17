@@ -22,16 +22,17 @@ const Navigation = () => {
         <Link to="/vehicles">Vehicles For Rent</Link>
         </Trasformrwrapper>
         </li>
-
-      {/*   <li>
+        {loggedIn ? (
+          <>
+        <li>
           <Trasformrwrapper size={1.2}>
             <Link to="/reservations">Reservations</Link>
           </Trasformrwrapper>
-        </li> */}
-        {loggedIn ? (
+        </li>
+        
           <li>
             <Link to="/" onClick={() => Auth.logout()}>Logout</Link></li>
-
+        </>
         ) : (
           <>
             <li>
