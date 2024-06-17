@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { ADD_USER } from "../utils/mutations";
-import Auth from "../utils/auth";
-import "./SignUp.css";
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations';
+import Auth from '../utils/auth';
+import './SignUp.css';
 
 const SignUp = () => {
-  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     username: "",
     email: "",
@@ -25,8 +23,7 @@ const SignUp = () => {
       const { data } = await addUser({
         variables: { ...formState },
       });
-      Auth.login(data.addUser.token); // Store token in local storage
-      navigate("/reservations"); // Redirect to reservations page after successful sign-up
+      Auth.login(data.addUser.token);
     } catch (e) {
       console.error("Sign up error:", e);
     }

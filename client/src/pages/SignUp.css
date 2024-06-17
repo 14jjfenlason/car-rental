@@ -70,3 +70,23 @@
     margin-top: 1rem;
   }
   
+  /* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .signup-title {
+    font-size: 1.5rem;
+  }
+
+  .signup-form {
+    max-width: 300px;
+  }
+
+  .form-input {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .signup-button {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+}
