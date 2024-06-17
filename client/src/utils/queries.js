@@ -71,27 +71,24 @@ export const GET_VEHICLES = gql`
   }
 `;
 
+
 export const GET_RESERVATION = gql`
-query Reservation($reservationId: ID!) {
-  reservation(reservationId: $reservationId) {
-    _id
-    endDate
-    startDate
-    startTime
-    endTime
-    car {
+  query getReservation {
+    getReservation {
       _id
-      make
-      model
-      year
-      type
-      mileage
-      stock
-      image
+      startDate
+      endDate
+      startTime
+      endTime
+      car {
+        _id
+        make
+        model
+      }
     }
   }
-}
 `;
+
 export const GET_RESERVATIONS = gql`
 query Reservations {
   reservations {
@@ -113,7 +110,6 @@ query Reservations {
   }
 }
 `;
-
 
 
 

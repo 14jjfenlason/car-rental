@@ -23,11 +23,11 @@ const Navigation = () => {
         </Trasformrwrapper>
         </li>
 
-        <li>
+      {/*   <li>
           <Trasformrwrapper size={1.2}>
             <Link to="/reservations">Reservations</Link>
           </Trasformrwrapper>
-        </li>
+        </li> */}
         {loggedIn ? (
           <li>
             <Link to="/" onClick={() => Auth.logout()}>Logout</Link></li>

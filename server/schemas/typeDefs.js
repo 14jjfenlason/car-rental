@@ -8,7 +8,7 @@ const typeDefs = gql`
     reservations: [Reservation]
   }
 
-  type Car {
+   type Car {
     _id: ID!
     make: String!
     model: String!

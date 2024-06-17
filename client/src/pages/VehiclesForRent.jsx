@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Vehicle from '../components/Vehicle';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -8,20 +8,18 @@ import ReservationLength from '../components/ReservationLength';
 
 export default function VehiclesForRent() {
   const [fullscreen, setFullscreen] = useState(true);
- const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const { loading, error, data} = useQuery(GET_VEHICLES);
+  const { loading, error, data } = useQuery(GET_VEHICLES);
 
-  
-  function handleShow(breakpoint) {
-    setFullscreen(breakpoint);
+  function handleShow(vehicle) {
+    setFullscreen(true);
     setShow(true);
+    localStorage.setItem('selectedVehicle', JSON.stringify(vehicle)); // Save selected vehicle to localStorage
   }
 
-  const handleReserve = (carId) => {
-    console.log(carId);
-    setShowReservation(true);
-    navigate('/reservations')
+  const handleReserve = () => {
+    navigate('/reservations');
   };
 
   if (loading) return <p>Loading...</p>;
@@ -29,17 +27,14 @@ export default function VehiclesForRent() {
 
   const vehicles = data?.vehicles || [];
 
-
   return (
-        <div>
-        {data.vehicles.map(vehicle=> (
-         <Vehicle key={vehicle.id} data={vehicle} handleShow={handleShow} />
-        ))}
-        {/* {showReservation && (
-          <div style={{display: 'absolute', top: 1}}> */}
-          <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}><ReservationLength /></Modal>
-          {/* </div> */}
-          {/* // )} */}
-       </div>
-  )
+    <div>
+      {vehicles.map((vehicle) => (
+        <Vehicle key={vehicle._id} data={vehicle} handleShow={handleShow} />
+      ))}
+      <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+        <ReservationLength handleReserve={handleReserve} />
+      </Modal>
+    </div>
+  );
 }

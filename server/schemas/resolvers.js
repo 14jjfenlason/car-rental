@@ -24,7 +24,7 @@ const resolvers = {
       return Car.find();
     },
     car: async (parent, { carId }) => {
-      return Car.findOne({ _id: carId });
+      return await Car.findById(carId);
     },
     reservations: async (_, args, context) => {
       if (context.user && context.user.isAdmin) {
@@ -68,9 +68,16 @@ const resolvers = {
     deleteUser: async (parent, { userId }) => {
       return User.findOneAndDelete({ _id: userId });
     },
-    addReservation: async (parent, args, context) => {
+   
+    addReservation: async (parent, { car, startDate, endDate, startTime, endTime }, context) => {
       if (context.user) {
-        const reservation = await Reservation.create(args);
+        const reservation = await Reservation.create({
+          car,
+          startDate,
+          endDate,
+          startTime,
+          endTime
+        });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -78,31 +85,10 @@ const resolvers = {
           { new: true }
         );
 
-        return reservation;
+        return reservation.populate('car'); 
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in');
     },
-
-    // addReservation: async (parent, { car, startDate, endDate, startTime, endTime }, context) => {
-    //   if (context.user) {
-    //     const reservation = await Reservation.create({
-    //       car,
-    //       startDate,
-    //       endDate,
-    //       startTime,
-    //       endTime
-    //     });
-
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $push: { reservations: reservation._id } },
-    //       { new: true }
-    //     );
-
-    //     return reservation.populate('car'); // added populate method so when we click reservation it will populate the car that want to be reserved. 
-    //   }
-    //   throw new AuthenticationError('You need to be logged in');
-    // },
 
     deleteReservation: async (parent, { reservationId }) => {
       return Reservation.findOneAndDelete({ _id: reservationId });
