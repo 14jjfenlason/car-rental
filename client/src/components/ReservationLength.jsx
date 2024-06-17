@@ -51,10 +51,11 @@ export default function ReservationLength({ car }) {
       });
 
  
-      navigate("/reservations");
+      
     } catch (error) {
       console.log(error);
     }
+    navigate("/reservations");
   };
 
   return (
@@ -142,7 +143,7 @@ export default function ReservationLength({ car }) {
                   </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary mb-2">
+                <button type="submit" onClick={handleSubmit}  className="btn btn-primary mb-2">
                   submit
                 </button>
               </form>
