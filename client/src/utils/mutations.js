@@ -65,3 +65,33 @@ export const DELETE_RESERVATION = gql`
   }
 }
 `;
+
+export const GET_VEHICLES = gql`
+  query GetAllVehicles {
+    vehicles {
+      _id
+      make
+      model
+      year
+      type
+      mileage
+      stock
+      image
+    }
+  }
+`;
+
+export const GET_VEHICLE_DETAIL = gql`
+  query GetVehicleDetail($id: ID!) {
+    vehicle(id: $id) {
+      _id
+      make
+      model
+      year
+      type
+      mileage
+      stock
+      image
+    }
+  }
+`;
